@@ -1,0 +1,33 @@
+@import "tailwindcss";
+@import "../design-system/tokens.css";
+
+/* Ruella — Tailwind v4 CSS-first theme (mirrors design-system/tailwind.preset.cjs).
+   next/font injects --font-cormorant / --font-manrope / --font-plex on <html>. */
+@theme {
+  --color-galeria: #F6F5F1;
+  --color-grafito: #1A1B18;
+  --color-salvia: #7B8A6F;
+  --color-salvia-dark: #63735A;
+  --color-nacar: #EDEBE4;
+  --color-piedra: #B9B6AC;
+  --color-linea: #DCDAD0;
+
+  --font-display: var(--font-cormorant), "Cormorant Garamond", serif;
+  --font-body: var(--font-manrope), "Manrope", sans-serif;
+  --font-mono: var(--font-plex), "IBM Plex Mono", monospace;
+
+  --tracking-brand: 0.09em;
+  --tracking-label: 0.26em;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--color-galeria);
+  color: var(--color-grafito);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--color-nacar); color: var(--color-grafito); }
