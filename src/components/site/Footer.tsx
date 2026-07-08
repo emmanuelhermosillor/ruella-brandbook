@@ -22,9 +22,12 @@ export function Footer({ lang }: { lang: Lang }) {
           <p className="max-w-[560px] font-body text-[12px] font-light leading-relaxed text-galeria/45">
             {copy.footer.disclaimer[lang]}
           </p>
-          <p className="font-mono text-[11px] tracking-[0.14em] text-galeria/45">
-            © Ruella
-          </p>
+          <div className="flex items-center gap-6 font-mono text-[11px] tracking-[0.14em] text-galeria/45">
+            <a href="/privacidad" className="uppercase tracking-[0.18em] transition-colors hover:text-galeria">
+              {copy.footer.privacy[lang]}
+            </a>
+            <span>© Ruella</span>
+          </div>
         </div>
       </div>
     </footer>

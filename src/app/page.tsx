@@ -1,6 +1,5 @@
 "use client";
-import { useState } from "react";
-import { type Lang } from "@/content/copy";
+import { useLang } from "@/lib/useLang";
 import { Nav } from "@/components/site/Nav";
 import { Hero } from "@/components/site/Hero";
 import { Casa } from "@/components/site/Casa";
@@ -10,7 +9,7 @@ import { Acceso } from "@/components/site/Acceso";
 import { Footer } from "@/components/site/Footer";
 
 export default function Page() {
-  const [lang, setLang] = useState<Lang>("es");
+  const [lang, setLang] = useLang();
 
   return (
     <>

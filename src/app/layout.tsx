@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Manrope, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@/components/site/Analytics";
+import { ConsentBanner } from "@/components/site/ConsentBanner";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -24,9 +26,17 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ruella.mx"),
   title: "Ruella · Quietly first.",
-  description: "A house of curation. A closed circle. Access by invitation.",
-  robots: { index: false, follow: false },
+  description: "Una casa de curaduría. Un círculo cerrado. Acceso por invitación.",
+  openGraph: {
+    title: "Ruella · Quietly first.",
+    description: "Una casa de curaduría. Un círculo cerrado. Acceso por invitación.",
+    url: "https://ruella.mx",
+    siteName: "Ruella",
+    locale: "es_MX",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -39,7 +49,11 @@ export default function RootLayout({
       lang="es"
       className={`${cormorant.variable} ${manrope.variable} ${plexMono.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col bg-galeria text-grafito">{children}</body>
+      <body className="min-h-full flex flex-col bg-galeria text-grafito">
+        {children}
+        <ConsentBanner />
+        <Analytics />
+      </body>
     </html>
   );
 }

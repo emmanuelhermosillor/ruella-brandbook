@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 import { Wordmark } from "@/components/Wordmark";
 import { copy, type Lang } from "@/content/copy";
 
+// Absolute (leading "/") so the nav works from every route, not just home.
 const links = [
-  { href: "#casa", key: "casa" },
-  { href: "#circulo", key: "circulo" },
-  { href: "#opening", key: "opening" },
-  { href: "#acceso", key: "acceso" },
+  { href: "/#casa", key: "casa" },
+  { href: "/#circulo", key: "circulo" },
+  { href: "/#opening", key: "opening" },
+  { href: "/#acceso", key: "acceso" },
 ] as const;
 
 export function Nav({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
@@ -29,7 +30,7 @@ export function Nav({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void 
       }`}
     >
       <div className="mx-auto flex max-w-[1240px] items-center justify-between px-6 py-5 md:px-12">
-        <a href="#top" className="text-[19px] text-grafito">
+        <a href="/" className="text-[19px] text-grafito">
           <Wordmark />
         </a>
 
@@ -63,7 +64,7 @@ export function Nav({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void 
           </div>
           {/* Quiet outline — the salvia fill is reserved for the in-content CTA, one per view. */}
           <a
-            href="#acceso"
+            href="/#acceso"
             className="hidden border border-grafito/25 px-[18px] py-[11px] font-mono text-[11px] uppercase tracking-[0.18em] text-grafito transition-colors hover:border-grafito hover:bg-grafito hover:text-galeria sm:inline-block"
           >
             {copy.nav.cta[lang]}
