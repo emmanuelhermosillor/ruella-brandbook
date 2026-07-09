@@ -173,7 +173,7 @@ export const surveys: Record<"investor" | "broker" | "developer", SurveyQuestion
       kind: "select",
       options: [
         { value: "absorcion", es: "Absorción temprana", en: "Early absorption" },
-        { value: "sello", es: "El Visto Bueno y el sello", en: "The Review and the seal" },
+        { value: "sello", es: "El Dictamen y el sello", en: "The Assessment and the seal" },
         { value: "ambas", es: "Ambas", en: "Both" },
       ],
     },
