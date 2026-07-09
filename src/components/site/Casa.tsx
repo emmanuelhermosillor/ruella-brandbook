@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Section } from "@/components/Section";
 import { Label } from "@/components/Label";
 import { copy, type Lang } from "@/content/copy";
@@ -19,15 +20,16 @@ export function Casa({ lang }: { lang: Lang }) {
           </p>
         </div>
 
-        {/* Image placeholder 4:5 — editorial photo drops in here. */}
         <div className="relative aspect-[4/5] w-full overflow-hidden border border-linea">
-          <div
-            className="absolute inset-0"
-            style={{ background: "linear-gradient(160deg, var(--color-nacar) 0%, var(--color-piedra) 100%)" }}
-            aria-hidden
+          <Image
+            src="/img/casa.jpg"
+            alt={copy.figs.casa.alt[lang]}
+            fill
+            sizes="(min-width: 768px) 45vw, 100vw"
+            className="object-cover"
           />
-          <span className="absolute bottom-6 left-6 font-mono text-[10px] uppercase tracking-[0.22em] text-grafito/40">
-            FIG. 002 · La Casa
+          <span className="absolute bottom-6 left-6 font-mono text-[10px] uppercase tracking-[0.22em] text-galeria/80 mix-blend-difference">
+            {copy.figs.casa.caption[lang]}
           </span>
         </div>
       </div>

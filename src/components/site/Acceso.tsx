@@ -1,5 +1,6 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { track } from "@vercel/analytics";
 import { Section } from "@/components/Section";
 import { copy, type Lang } from "@/content/copy";
@@ -7,6 +8,43 @@ import { pinned, countries, defaultDial } from "@/lib/countries";
 import { Turnstile } from "./Turnstile";
 
 type Role = "investor" | "broker" | "developer";
+
+/**
+ * Atmósfera del gate: una imagen quieta y fija durante los 6 pasos; al llegar al
+ * éxito, crossfade (500ms) a una imagen más cálida. La foto acompaña, no compite.
+ */
+function GateAtmosphere({ lang, done, variant }: { lang: Lang; done: boolean; variant: "desktop" | "mobile" }) {
+  const wrap =
+    variant === "desktop"
+      ? "relative hidden h-full min-h-[560px] w-full overflow-hidden border border-linea md:block"
+      : "relative h-[150px] w-full overflow-hidden border border-linea md:hidden";
+  const sizes = variant === "desktop" ? "40vw" : "100vw";
+  return (
+    <figure className={wrap}>
+      <Image
+        src="/img/gate.jpg"
+        alt={copy.figs.gate.alt[lang]}
+        fill
+        sizes={sizes}
+        className={`object-cover transition-opacity duration-500 ${done ? "opacity-0" : "opacity-100"}`}
+        style={{ objectPosition: "center" }}
+      />
+      <Image
+        src="/img/gate-success.jpg"
+        alt={copy.figs.gateSuccess.alt[lang]}
+        fill
+        sizes={sizes}
+        className={`object-cover transition-opacity duration-500 ${done ? "opacity-100" : "opacity-0"}`}
+        style={{ objectPosition: "center" }}
+      />
+      {/* Velo nácar sutil para que el caption y el borde respiren. */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden style={{ background: "linear-gradient(0deg, rgba(237,235,228,0.35) 0%, rgba(237,235,228,0) 45%)" }} />
+      <figcaption className="absolute bottom-5 left-5 z-10 font-mono text-[10px] uppercase tracking-[0.22em] text-galeria/85 mix-blend-difference">
+        {done ? copy.figs.gateSuccess.caption[lang] : copy.figs.gate.caption[lang]}
+      </figcaption>
+    </figure>
+  );
+}
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const STEPS = ["name", "email", "phone", "role", "message", "consent"] as const;
 type StepKey = (typeof STEPS)[number];
@@ -143,16 +181,19 @@ export function Acceso({ lang, defaultRole }: { lang: Lang; defaultRole?: Role }
 
   return (
     <Section id="acceso" className="border-t border-linea">
-      <div className="grid gap-16 md:grid-cols-[0.85fr_1.15fr] md:gap-24">
-        <div className="max-w-[420px]">
-          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-grafito/50">{t.label[lang]}</p>
-          <h2 className="mt-6 font-display text-[clamp(2rem,4vw,3rem)] font-medium leading-[1.1] tracking-tight">
-            {t.title[lang]}
-          </h2>
-          <p className="mt-7 font-body text-[16px] font-light leading-relaxed text-grafito/70">{t.body[lang]}</p>
-        </div>
+      <div className="grid gap-14 md:grid-cols-[1fr_0.68fr] md:items-stretch md:gap-20">
+        {/* IZQUIERDA — la ceremonia, intacta. Banda de atmósfera solo en móvil. */}
+        <div>
+          <GateAtmosphere lang={lang} done={done} variant="mobile" />
+          <div className="mt-10 max-w-[440px] md:mt-0">
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-grafito/50">{t.label[lang]}</p>
+            <h2 className="mt-6 font-display text-[clamp(2rem,4vw,3rem)] font-medium leading-[1.1] tracking-tight">
+              {t.title[lang]}
+            </h2>
+            <p className="mt-7 font-body text-[16px] font-light leading-relaxed text-grafito/70">{t.body[lang]}</p>
+          </div>
 
-        <div className="w-full max-w-[560px]">
+          <div className="mt-12 w-full max-w-[560px]">
           {done ? (
             <div className="gate-step self-start">
               <h3 className="font-display text-[clamp(2rem,4vw,2.8rem)] font-medium leading-tight tracking-tight">
@@ -335,7 +376,11 @@ export function Acceso({ lang, defaultRole }: { lang: Lang; defaultRole?: Role }
               </div>
             </form>
           )}
+          </div>
         </div>
+
+        {/* DERECHA — fotografía vertical fija (desktop); crossfade cálido en el éxito. */}
+        <GateAtmosphere lang={lang} done={done} variant="desktop" />
       </div>
     </Section>
   );

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { track } from "@vercel/analytics";
 import { useLang } from "@/lib/useLang";
 import { copy, type Lang } from "@/content/copy";
@@ -150,6 +151,20 @@ function SurveyForm({
               </div>
             ) : (
               <>
+                {/* Misma foto del gate — para que gate y aplicación sean una sola casa. */}
+                <figure className="relative mb-16 aspect-[16/6] w-full max-w-[820px] overflow-hidden border border-linea">
+                  <Image
+                    src="/img/gate.jpg"
+                    alt={copy.figs.gate.alt[lang]}
+                    fill
+                    sizes="(min-width: 768px) 820px, 100vw"
+                    className="object-cover"
+                    style={{ objectPosition: "center 35%" }}
+                  />
+                  <figcaption className="absolute bottom-5 left-5 font-mono text-[10px] uppercase tracking-[0.22em] text-galeria/85 mix-blend-difference">
+                    {copy.figs.gate.caption[lang]}
+                  </figcaption>
+                </figure>
                 <div className="max-w-[620px]">
                   <p className="font-mono text-[11px] uppercase tracking-label text-grafito/50">{copy.aplicacion.label[lang]}</p>
                   <p className="mt-7 font-body text-[17px] font-light leading-relaxed text-grafito/75">{copy.aplicacion.intro[lang]}</p>

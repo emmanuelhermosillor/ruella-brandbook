@@ -341,4 +341,31 @@ export const copy = {
     },
     privacy: { es: "Aviso de privacidad", en: "Privacy Notice" },
   },
+
+  // Fotografía del banco de la casa (Death to Stock). alt = accesibilidad; caption = mono.
+  figs: {
+    hero: {
+      alt: { es: "Campo dorado al atardecer entre árboles y muros de piedra.", en: "A golden field at dusk among trees and stone walls." },
+      caption: { es: "Fig. 001 · Campo, luz de tarde · DTS", en: "Fig. 001 · Field, evening light · DTS" },
+    },
+    casa: {
+      alt: { es: "Desayuno servido sobre lino blanco con charolas de plata.", en: "Breakfast set on white linen with silver trays." },
+      caption: { es: "Plate 01 · La mesa · DTS", en: "Plate 01 · The table · DTS" },
+    },
+    opening: {
+      alt: { es: "Ramas iluminadas a contraluz alcanzando el cielo.", en: "Backlit branches reaching toward the sky." },
+      caption: { es: "Fig. 002 · Luz que se abre · DTS", en: "Fig. 002 · Light breaking · DTS" },
+    },
+    gate: {
+      alt: { es: "Hojas verdes en penumbra, en calma.", en: "Green fronds in soft shade, at rest." },
+      caption: { es: "Fig. 003 · En calma · DTS", en: "Fig. 003 · At rest · DTS" },
+    },
+    gateSuccess: {
+      alt: { es: "La casa al caer la tarde, campo dorado.", en: "The house at dusk, a golden field." },
+      caption: { es: "Fig. 004 · La casa, al caer la tarde · DTS", en: "Fig. 004 · The house, at dusk · DTS" },
+    },
+    emailBand: {
+      alt: { es: "Manos en reposo sobre el musgo.", en: "Hands resting on moss." },
+    },
+  },
 } as const;

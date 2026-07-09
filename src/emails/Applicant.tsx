@@ -1,5 +1,6 @@
-import { Button } from "@react-email/components";
+import { Button, Img } from "@react-email/components";
 import * as React from "react";
+import { copy } from "@/content/copy";
 import { Shell, FootNote, c, serif, sans } from "./_shell";
 
 type Lang = "es" | "en";
@@ -33,6 +34,13 @@ export function Applicant({ name, lang, actionUrl }: { name: string; lang: Lang;
       preview={s.preview}
       footer={<FootNote text={`${s.foot} ·`} link={{ label: s.privacy, href: "https://ruella.mx/privacidad" }} />}
     >
+      {/* Una sola banda, muted. El correo se lee perfecto aunque el cliente la bloquee. */}
+      <Img
+        src="https://ruella.mx/img/email-band.jpg"
+        alt={copy.figs.emailBand.alt[lang]}
+        width="472"
+        style={{ width: "100%", height: "auto", display: "block", border: `1px solid ${c.piedra}`, marginBottom: 32 }}
+      />
       <p style={{ margin: "0 0 24px", fontFamily: serif, fontSize: 26, lineHeight: "32px", color: c.grafito }}>
         {name},
       </p>

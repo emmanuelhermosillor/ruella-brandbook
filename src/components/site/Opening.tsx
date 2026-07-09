@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Section } from "@/components/Section";
 import { Button } from "@/components/Button";
 import { copy, type Lang } from "@/content/copy";
@@ -19,6 +20,21 @@ export function Opening({ lang }: { lang: Lang }) {
           <Button href="#acceso">{copy.opening.cta[lang]}</Button>
         </div>
       </div>
+
+      {/* Horizontal evocadora — anticipación. Teaser, no álbum. */}
+      <figure className="relative mt-20 aspect-[16/7] w-full overflow-hidden border border-linea">
+        <Image
+          src="/img/opening.jpg"
+          alt={copy.figs.opening.alt[lang]}
+          fill
+          sizes="(min-width: 768px) 90vw, 100vw"
+          className="object-cover"
+          style={{ objectPosition: "center 55%" }}
+        />
+        <figcaption className="absolute bottom-5 left-5 font-mono text-[10px] uppercase tracking-[0.22em] text-galeria/85 mix-blend-difference">
+          {copy.figs.opening.caption[lang]}
+        </figcaption>
+      </figure>
     </Section>
   );
 }
