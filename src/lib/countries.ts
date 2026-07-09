@@ -1,0 +1,73 @@
+// Códigos de marcación para el paso de teléfono. Sin banderas — sobrio.
+// `pinned` va arriba; `countries` es la lista larga (orden alfabético por nombre ES).
+export type Country = { iso: string; dial: string; es: string; en: string };
+
+export const pinned: Country[] = [
+  { iso: "MX", dial: "+52", es: "México", en: "Mexico" },
+  { iso: "US", dial: "+1", es: "USA / Canadá", en: "USA / Canada" },
+];
+
+export const countries: Country[] = [
+  { iso: "DE", dial: "+49", es: "Alemania", en: "Germany" },
+  { iso: "AR", dial: "+54", es: "Argentina", en: "Argentina" },
+  { iso: "AU", dial: "+61", es: "Australia", en: "Australia" },
+  { iso: "AT", dial: "+43", es: "Austria", en: "Austria" },
+  { iso: "BE", dial: "+32", es: "Bélgica", en: "Belgium" },
+  { iso: "BZ", dial: "+501", es: "Belice", en: "Belize" },
+  { iso: "BO", dial: "+591", es: "Bolivia", en: "Bolivia" },
+  { iso: "BR", dial: "+55", es: "Brasil", en: "Brazil" },
+  { iso: "CA", dial: "+1", es: "Canadá", en: "Canada" },
+  { iso: "CL", dial: "+56", es: "Chile", en: "Chile" },
+  { iso: "CN", dial: "+86", es: "China", en: "China" },
+  { iso: "CO", dial: "+57", es: "Colombia", en: "Colombia" },
+  { iso: "KR", dial: "+82", es: "Corea del Sur", en: "South Korea" },
+  { iso: "CR", dial: "+506", es: "Costa Rica", en: "Costa Rica" },
+  { iso: "CU", dial: "+53", es: "Cuba", en: "Cuba" },
+  { iso: "DK", dial: "+45", es: "Dinamarca", en: "Denmark" },
+  { iso: "EC", dial: "+593", es: "Ecuador", en: "Ecuador" },
+  { iso: "EG", dial: "+20", es: "Egipto", en: "Egypt" },
+  { iso: "SV", dial: "+503", es: "El Salvador", en: "El Salvador" },
+  { iso: "AE", dial: "+971", es: "Emiratos Árabes Unidos", en: "United Arab Emirates" },
+  { iso: "ES", dial: "+34", es: "España", en: "Spain" },
+  { iso: "FI", dial: "+358", es: "Finlandia", en: "Finland" },
+  { iso: "FR", dial: "+33", es: "Francia", en: "France" },
+  { iso: "GR", dial: "+30", es: "Grecia", en: "Greece" },
+  { iso: "GT", dial: "+502", es: "Guatemala", en: "Guatemala" },
+  { iso: "HN", dial: "+504", es: "Honduras", en: "Honduras" },
+  { iso: "HK", dial: "+852", es: "Hong Kong", en: "Hong Kong" },
+  { iso: "IN", dial: "+91", es: "India", en: "India" },
+  { iso: "ID", dial: "+62", es: "Indonesia", en: "Indonesia" },
+  { iso: "IE", dial: "+353", es: "Irlanda", en: "Ireland" },
+  { iso: "IL", dial: "+972", es: "Israel", en: "Israel" },
+  { iso: "IT", dial: "+39", es: "Italia", en: "Italy" },
+  { iso: "JP", dial: "+81", es: "Japón", en: "Japan" },
+  { iso: "LU", dial: "+352", es: "Luxemburgo", en: "Luxembourg" },
+  { iso: "MY", dial: "+60", es: "Malasia", en: "Malaysia" },
+  { iso: "MA", dial: "+212", es: "Marruecos", en: "Morocco" },
+  { iso: "MC", dial: "+377", es: "Mónaco", en: "Monaco" },
+  { iso: "NI", dial: "+505", es: "Nicaragua", en: "Nicaragua" },
+  { iso: "NO", dial: "+47", es: "Noruega", en: "Norway" },
+  { iso: "NZ", dial: "+64", es: "Nueva Zelanda", en: "New Zealand" },
+  { iso: "NL", dial: "+31", es: "Países Bajos", en: "Netherlands" },
+  { iso: "PA", dial: "+507", es: "Panamá", en: "Panama" },
+  { iso: "PY", dial: "+595", es: "Paraguay", en: "Paraguay" },
+  { iso: "PE", dial: "+51", es: "Perú", en: "Peru" },
+  { iso: "PL", dial: "+48", es: "Polonia", en: "Poland" },
+  { iso: "PT", dial: "+351", es: "Portugal", en: "Portugal" },
+  { iso: "GB", dial: "+44", es: "Reino Unido", en: "United Kingdom" },
+  { iso: "CZ", dial: "+420", es: "República Checa", en: "Czech Republic" },
+  { iso: "DO", dial: "+1", es: "República Dominicana", en: "Dominican Republic" },
+  { iso: "RU", dial: "+7", es: "Rusia", en: "Russia" },
+  { iso: "SG", dial: "+65", es: "Singapur", en: "Singapore" },
+  { iso: "ZA", dial: "+27", es: "Sudáfrica", en: "South Africa" },
+  { iso: "SE", dial: "+46", es: "Suecia", en: "Sweden" },
+  { iso: "CH", dial: "+41", es: "Suiza", en: "Switzerland" },
+  { iso: "TH", dial: "+66", es: "Tailandia", en: "Thailand" },
+  { iso: "TR", dial: "+90", es: "Turquía", en: "Turkey" },
+  { iso: "UY", dial: "+598", es: "Uruguay", en: "Uruguay" },
+  { iso: "VE", dial: "+58", es: "Venezuela", en: "Venezuela" },
+];
+
+export function defaultDial(lang: "es" | "en"): string {
+  return lang === "en" ? "+1" : "+52";
+}

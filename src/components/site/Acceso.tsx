@@ -1,152 +1,341 @@
 "use client";
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { track } from "@vercel/analytics";
 import { Section } from "@/components/Section";
-import { Button } from "@/components/Button";
 import { copy, type Lang } from "@/content/copy";
+import { pinned, countries, defaultDial } from "@/lib/countries";
+import { Turnstile } from "./Turnstile";
 
-type Status = "idle" | "loading" | "sent" | "error";
 type Role = "investor" | "broker" | "developer";
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const STEPS = ["name", "email", "phone", "role", "message", "consent"] as const;
+type StepKey = (typeof STEPS)[number];
+const ROLE_KEYS: Role[] = ["investor", "broker", "developer"];
 
-const fieldCls =
-  "w-full border-b border-linea bg-transparent py-3 font-body text-[15px] text-grafito outline-none transition-colors placeholder:text-piedra focus:border-grafito";
-const fieldLabelCls = "font-mono text-[10px] uppercase tracking-[0.2em] text-grafito/50";
+const inputCls =
+  "w-full border-b border-piedra bg-transparent pb-3 font-display text-[clamp(1.5rem,3vw,2rem)] font-light text-grafito outline-none transition-colors placeholder:text-piedra/70 focus-visible:border-grafito";
+const noteCls = "mt-4 font-mono text-[11px] uppercase tracking-[0.18em] text-grafito/45";
+const errorCls = "mt-4 font-mono text-[11px] uppercase tracking-[0.16em] text-salvia-dark";
 
 export function Acceso({ lang, defaultRole }: { lang: Lang; defaultRole?: Role }) {
   const t = copy.acceso;
-  const [status, setStatus] = useState<Status>("idle");
+  const [step, setStep] = useState(0);
+  const [done, setDone] = useState(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
+  const [error, setError] = useState("");
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const fd = new FormData(form);
-    const payload = {
-      name: fd.get("name"),
-      email: fd.get("email"),
-      phone: fd.get("phone"),
-      role: fd.get("role"),
-      message: fd.get("message"),
-      company: fd.get("company"), // honeypot — always empty for humans
-      consent: fd.get("consent") === "on",
-      lang,
-    };
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [dial, setDial] = useState(defaultDial(lang));
+  const [phoneNat, setPhoneNat] = useState("");
+  const [role, setRole] = useState<Role | "">(defaultRole ?? "");
+  const [message, setMessage] = useState("");
+  const [consent, setConsent] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
+
+  const companyRef = useRef<HTMLInputElement>(null); // honeypot
+  const refRef = useRef<string>("");
+  const started = useRef(false);
+  const digits = phoneNat.replace(/\D/g, "");
+
+  // Captura de referencia (?ref= / utm_*), primer valor visto, en sessionStorage.
+  useEffect(() => {
+    try {
+      const p = new URL(window.location.href).searchParams;
+      let ref = (p.get("ref") || "").trim();
+      if (!ref && (p.get("utm_source") || p.get("utm_medium") || p.get("utm_campaign"))) {
+        ref = `utm:${p.get("utm_source") || ""}/${p.get("utm_medium") || ""}/${p.get("utm_campaign") || ""}`;
+      }
+      const existing = sessionStorage.getItem("ruella-ref");
+      if (existing) refRef.current = existing;
+      else if (ref) {
+        const v = ref.slice(0, 120);
+        sessionStorage.setItem("ruella-ref", v);
+        refRef.current = v;
+      }
+    } catch {
+      /* no-op */
+    }
+  }, []);
+
+  // Foco en el campo primario al cambiar de paso.
+  const stageRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (done) return;
+    const el = stageRef.current?.querySelector<HTMLElement>("[data-autofocus]");
+    el?.focus();
+  }, [step, done]);
+
+  const markStart = useCallback(() => {
+    if (!started.current) {
+      started.current = true;
+      track("gate_start");
+    }
+  }, []);
+
+  function validate(i: number): string {
+    const k: StepKey = STEPS[i];
+    if (k === "name") return name.trim() ? "" : t.steps.name.error[lang];
+    if (k === "email") return EMAIL_RE.test(email.trim()) ? "" : t.steps.email.error[lang];
+    if (k === "phone") return dial && digits.length >= 8 && digits.length <= 15 ? "" : t.steps.phone.error[lang];
+    if (k === "role") return role ? "" : t.steps.role.error[lang];
+    if (k === "message") return message.trim() ? "" : t.steps.message.error[lang];
+    if (k === "consent") return consent ? "" : t.steps.consent.error[lang];
+    return "";
+  }
+
+  function goNext() {
+    const err = validate(step);
+    if (err) return setError(err);
+    setError("");
+    const ns = step + 1;
+    setStep(ns);
+    track("gate_step", { step: ns + 1 });
+  }
+  function goBack() {
+    setError("");
+    if (step > 0) setStep(step - 1);
+  }
+
+  async function submit() {
+    const err = validate(STEPS.length - 1);
+    if (err) return setError(err);
     setStatus("loading");
+    setError("");
+    track("gate_submit");
     try {
       const res = await fetch("/api/access", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          phone: `${dial}${digits}`,
+          role,
+          message: message.trim(),
+          consent: true,
+          lang,
+          company: companyRef.current?.value || "",
+          turnstileToken,
+          ref: refRef.current || undefined,
+        }),
       });
       if (!res.ok) throw new Error(String(res.status));
-      setStatus("sent");
-      form.reset();
+      setDone(true);
+      track("gate_success");
     } catch {
-      // Covers 429 (rate limit) and 502 (both deliveries failed), plus network.
       setStatus("error");
+      setError(t.retry[lang]);
     }
   }
 
+  function onKeyDown(e: React.KeyboardEvent) {
+    if (e.key !== "Enter") return;
+    const tag = (e.target as HTMLElement).tagName;
+    if (tag === "TEXTAREA") return; // message: Enter = salto de línea
+    e.preventDefault();
+    if (step === STEPS.length - 1) submit();
+    else goNext();
+  }
+
+  const isLast = step === STEPS.length - 1;
+  const counter = `${String(step + 1).padStart(2, "0")} / ${String(STEPS.length).padStart(2, "0")}`;
+
   return (
     <Section id="acceso" className="border-t border-linea">
-      <div className="grid gap-16 md:grid-cols-[0.9fr_1.1fr] md:gap-24">
+      <div className="grid gap-16 md:grid-cols-[0.85fr_1.15fr] md:gap-24">
         <div className="max-w-[420px]">
-          <p className={fieldLabelCls}>{t.label[lang]}</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-grafito/50">{t.label[lang]}</p>
           <h2 className="mt-6 font-display text-[clamp(2rem,4vw,3rem)] font-medium leading-[1.1] tracking-tight">
             {t.title[lang]}
           </h2>
-          <p className="mt-7 font-body text-[16px] font-light leading-relaxed text-grafito/70">
-            {t.body[lang]}
-          </p>
+          <p className="mt-7 font-body text-[16px] font-light leading-relaxed text-grafito/70">{t.body[lang]}</p>
         </div>
 
-        {status === "sent" ? (
-          <p className="self-center font-display text-[1.6rem] font-medium leading-snug text-grafito">
-            {t.form.success[lang]}
-          </p>
-        ) : (
-          <form onSubmit={onSubmit} className="w-full max-w-[520px]" data-clarity-mask="true">
-            {/* Honeypot: off-screen, not display:none (some bots skip hidden fields). */}
-            <div aria-hidden className="absolute left-[-9999px] top-auto h-0 w-0 overflow-hidden" style={{ position: "absolute" }}>
-              <label>
-                Company
-                <input
-                  type="text"
-                  name="company"
-                  tabIndex={-1}
-                  autoComplete="off"
-                  data-clarity-mask="true"
-                />
-              </label>
+        <div className="w-full max-w-[560px]">
+          {done ? (
+            <div className="gate-step self-start">
+              <h3 className="font-display text-[clamp(2rem,4vw,2.8rem)] font-medium leading-tight tracking-tight">
+                {t.success.title[lang]}
+              </h3>
+              <p className="mt-6 max-w-[420px] font-body text-[17px] font-light leading-relaxed text-grafito/75">
+                {t.success.body[lang]}
+              </p>
             </div>
-
-            <fieldset disabled={status === "loading"} className="grid gap-8">
-              <div className="grid gap-2">
-                <label htmlFor="name" className={fieldLabelCls}>{t.form.name[lang]}</label>
-                <input id="name" name="name" required autoComplete="name" data-clarity-mask="true" className={fieldCls} />
-              </div>
-              <div className="grid gap-2">
-                <label htmlFor="email" className={fieldLabelCls}>{t.form.email[lang]}</label>
-                <input id="email" name="email" type="email" required autoComplete="email" data-clarity-mask="true" className={fieldCls} />
-              </div>
-              <div className="grid gap-2">
-                <label htmlFor="phone" className={fieldLabelCls}>{t.form.phone[lang]}</label>
-                <input id="phone" name="phone" type="tel" autoComplete="tel" data-clarity-mask="true" className={fieldCls} />
-              </div>
-              <div className="grid gap-2">
-                <label htmlFor="role" className={fieldLabelCls}>{t.form.role[lang]}</label>
-                <select
-                  id="role"
-                  name="role"
-                  required
-                  defaultValue={defaultRole ?? ""}
-                  data-clarity-mask="true"
-                  className={`${fieldCls} appearance-none`}
-                >
-                  <option value="" disabled hidden></option>
-                  <option value="investor">{t.form.roles.investor[lang]}</option>
-                  <option value="broker">{t.form.roles.broker[lang]}</option>
-                  <option value="developer">{t.form.roles.developer[lang]}</option>
-                </select>
-              </div>
-              <div className="grid gap-2">
-                <label htmlFor="message" className={fieldLabelCls}>{t.form.message[lang]}</label>
-                <textarea id="message" name="message" rows={3} data-clarity-mask="true" className={`${fieldCls} resize-none`} />
+          ) : (
+            <form
+              onKeyDown={onKeyDown}
+              onFocusCapture={markStart}
+              onSubmit={(e) => e.preventDefault()}
+              data-clarity-mask="true"
+              className="min-h-[340px]"
+            >
+              {/* Honeypot: fuera de pantalla, nunca display:none */}
+              <div aria-hidden style={{ position: "absolute", left: -9999, width: 1, height: 1, overflow: "hidden" }}>
+                <label>
+                  Company
+                  <input ref={companyRef} type="text" name="company" tabIndex={-1} autoComplete="off" />
+                </label>
               </div>
 
-              <label htmlFor="consent" className="flex cursor-pointer items-start gap-3">
-                <input
-                  id="consent"
-                  name="consent"
-                  type="checkbox"
-                  required
-                  className="mt-[3px] h-4 w-4 shrink-0 accent-grafito"
-                />
-                <span className="font-body text-[13px] font-light leading-relaxed text-grafito/70">
-                  {t.form.consent[lang]}{" "}
-                  <a
-                    href="/privacidad"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline decoration-linea underline-offset-4 transition-colors hover:text-grafito"
+              <p className="font-mono text-[11px] tracking-[0.28em] text-piedra">{counter}</p>
+
+              <div ref={stageRef} key={step} className="gate-step mt-8">
+                {STEPS[step] === "name" && (
+                  <>
+                    <label htmlFor="g-name" className="block font-display text-[clamp(1.7rem,3.2vw,2.4rem)] font-medium leading-tight tracking-tight">
+                      {t.steps.name.q[lang]}
+                    </label>
+                    <input
+                      id="g-name" data-autofocus name="name" autoComplete="name" data-clarity-mask="true"
+                      value={name} onChange={(e) => setName(e.target.value)}
+                      placeholder={t.steps.name.placeholder[lang]} className={`mt-8 ${inputCls}`}
+                    />
+                    <p className={noteCls}>{t.steps.name.note[lang]}</p>
+                  </>
+                )}
+
+                {STEPS[step] === "email" && (
+                  <>
+                    <label htmlFor="g-email" className="block font-display text-[clamp(1.7rem,3.2vw,2.4rem)] font-medium leading-tight tracking-tight">
+                      {t.steps.email.q[lang]}
+                    </label>
+                    <input
+                      id="g-email" data-autofocus name="email" type="email" inputMode="email" autoComplete="email" data-clarity-mask="true"
+                      value={email} onChange={(e) => setEmail(e.target.value)}
+                      placeholder={t.steps.email.placeholder[lang]} className={`mt-8 ${inputCls}`}
+                    />
+                    <p className={noteCls}>{t.steps.email.note[lang]}</p>
+                  </>
+                )}
+
+                {STEPS[step] === "phone" && (
+                  <>
+                    <p className="block font-display text-[clamp(1.7rem,3.2vw,2.4rem)] font-medium leading-tight tracking-tight">
+                      {t.steps.phone.q[lang]}
+                    </p>
+                    <div className="mt-8 flex items-end gap-4">
+                      <select
+                        aria-label={t.form.country[lang]} value={dial} onChange={(e) => setDial(e.target.value)}
+                        className="border-b border-piedra bg-transparent pb-3 font-body text-[16px] text-grafito outline-none transition-colors focus-visible:border-grafito"
+                      >
+                        {pinned.map((ct) => (
+                          <option key={`p-${ct.iso}`} value={ct.dial}>{`${ct.dial}  ${ct[lang]}`}</option>
+                        ))}
+                        <option disabled>──────────</option>
+                        {countries.map((ct) => (
+                          <option key={ct.iso} value={ct.dial}>{`${ct.dial}  ${ct[lang]}`}</option>
+                        ))}
+                      </select>
+                      <input
+                        id="g-phone" data-autofocus name="phone" type="tel" inputMode="tel" autoComplete="tel-national" data-clarity-mask="true"
+                        value={phoneNat} onChange={(e) => setPhoneNat(e.target.value)}
+                        placeholder={t.steps.phone.placeholder[lang]} className={`flex-1 ${inputCls}`}
+                      />
+                    </div>
+                    <p className={noteCls}>{t.steps.phone.note[lang]}</p>
+                  </>
+                )}
+
+                {STEPS[step] === "role" && (
+                  <>
+                    <p className="block font-display text-[clamp(1.7rem,3.2vw,2.4rem)] font-medium leading-tight tracking-tight">
+                      {t.steps.role.q[lang]}
+                    </p>
+                    <div role="radiogroup" aria-label={t.form.role[lang]} className="mt-8 flex flex-col">
+                      {ROLE_KEYS.map((r, i) => {
+                        const selected = role === r;
+                        return (
+                          <button
+                            key={r} type="button" role="radio" aria-checked={selected}
+                            data-autofocus={i === 0 ? true : undefined}
+                            onClick={() => { setRole(r); setError(""); }}
+                            className={`flex items-center gap-4 border-t border-linea py-5 text-left transition-colors last:border-b focus-visible:outline-none ${
+                              selected ? "text-grafito" : "text-grafito/55 hover:text-grafito"
+                            }`}
+                          >
+                            <span className={`inline-block h-[7px] w-[7px] shrink-0 rounded-full border border-grafito transition-colors ${selected ? "bg-grafito" : "bg-transparent"}`} />
+                            <span className="font-display text-[1.4rem] font-medium leading-none">{t.steps.role.options[r][lang]}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </>
+                )}
+
+                {STEPS[step] === "message" && (
+                  <>
+                    <label htmlFor="g-message" className="block font-display text-[clamp(1.7rem,3.2vw,2.4rem)] font-medium leading-tight tracking-tight">
+                      {t.steps.message.q[lang]}
+                    </label>
+                    <textarea
+                      id="g-message" data-autofocus name="message" rows={3} data-clarity-mask="true"
+                      value={message} onChange={(e) => setMessage(e.target.value)}
+                      className="mt-8 w-full resize-none border-b border-piedra bg-transparent pb-3 font-body text-[18px] font-light leading-relaxed text-grafito outline-none transition-colors placeholder:text-piedra/70 focus-visible:border-grafito"
+                    />
+                    <p className={noteCls}>{t.steps.message.note[lang]}</p>
+                  </>
+                )}
+
+                {STEPS[step] === "consent" && (
+                  <>
+                    <p className="block font-display text-[clamp(1.5rem,2.6vw,2rem)] font-medium leading-snug tracking-tight">
+                      {t.title[lang]}
+                    </p>
+                    <button
+                      type="button" role="checkbox" aria-checked={consent} data-autofocus
+                      onClick={() => { setConsent((v) => !v); setError(""); }}
+                      className="mt-8 flex items-start gap-4 text-left focus-visible:outline-none"
+                    >
+                      <span className={`mt-[2px] inline-flex h-5 w-5 shrink-0 items-center justify-center border transition-colors ${consent ? "border-grafito bg-grafito" : "border-piedra bg-transparent"}`}>
+                        {consent && (
+                          <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden>
+                            <path d="M2.5 6.2 5 8.5l4.5-5" stroke="#F6F5F1" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        )}
+                      </span>
+                      <span className="font-body text-[15px] font-light leading-relaxed text-grafito/75">
+                        {t.steps.consent.text[lang]}
+                      </span>
+                    </button>
+                    <a
+                      href="/privacidad" target="_blank" rel="noopener noreferrer"
+                      className="mt-4 inline-block font-mono text-[11px] uppercase tracking-[0.18em] text-grafito/55 underline decoration-linea underline-offset-4 transition-colors hover:text-grafito"
+                    >
+                      {t.steps.consent.privacyLink[lang]}
+                    </a>
+                    <Turnstile onToken={setTurnstileToken} />
+                  </>
+                )}
+
+                {error && <p className={errorCls}>{error}</p>}
+              </div>
+
+              <div className="mt-12 flex items-center gap-8">
+                {step > 0 && (
+                  <button type="button" onClick={goBack} className="font-mono text-[11px] uppercase tracking-[0.18em] text-grafito/50 transition-colors hover:text-grafito">
+                    {t.stepNav.back[lang]}
+                  </button>
+                )}
+                {isLast ? (
+                  <button
+                    type="button" onClick={submit} disabled={status === "loading"}
+                    className="inline-block bg-salvia px-[26px] py-[14px] font-mono text-[11px] uppercase tracking-[0.18em] text-white transition-colors hover:bg-salvia-dark disabled:opacity-60"
                   >
-                    {t.form.privacyLink[lang]}
-                  </a>
-                </span>
-              </label>
-
-              <div className="mt-2 flex items-center gap-5">
-                <Button type="submit">{t.form.submit[lang]}</Button>
-                {status === "loading" && (
-                  <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-piedra">…</span>
-                )}
-                {status === "error" && (
-                  <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-grafito/60">
-                    {t.form.retry[lang]}
-                  </span>
+                    {t.stepNav.submit[lang]}
+                  </button>
+                ) : (
+                  <button
+                    type="button" onClick={goNext}
+                    className="border border-grafito/25 px-[22px] py-[13px] font-mono text-[11px] uppercase tracking-[0.18em] text-grafito transition-colors hover:border-grafito hover:bg-grafito hover:text-galeria"
+                  >
+                    {t.stepNav.next[lang]}
+                  </button>
                 )}
               </div>
-            </fieldset>
-          </form>
-        )}
+            </form>
+          )}
+        </div>
       </div>
     </Section>
   );

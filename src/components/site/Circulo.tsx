@@ -10,6 +10,9 @@ export function Circulo({ lang }: { lang: Lang }) {
         <h2 className="mt-7 font-display text-[clamp(2rem,4vw,3.2rem)] font-medium leading-[1.1] tracking-tight text-galeria">
           {copy.circulo.title[lang]}
         </h2>
+        <p className="mt-6 font-body text-[16px] font-light leading-relaxed text-galeria/60">
+          {copy.circulo.sub[lang]}
+        </p>
       </div>
 
       <div className="mt-20 grid gap-px border-t border-galeria/15 md:grid-cols-3">

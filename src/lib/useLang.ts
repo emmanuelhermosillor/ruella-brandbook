@@ -20,7 +20,11 @@ export function useLang(): [Lang, (l: Lang) => void] {
   const [lang, setLang] = useState<Lang>("es");
 
   useEffect(() => {
-    const sync = () => setLang(readLang());
+    const sync = () => {
+      const next = readLang();
+      setLang(next);
+      document.documentElement.lang = next;
+    };
     sync();
     window.addEventListener(EVENT, sync);
     window.addEventListener("storage", sync);

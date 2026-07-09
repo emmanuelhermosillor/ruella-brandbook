@@ -1,0 +1,15 @@
+import { createToken, verifyToken } from "../src/lib/token";
+const base = { name: "María Fernanda Ruiz", email: "mf.ruiz@example.com", lang: "es" as const };
+const broker = createToken({ ...base, role: "broker" });
+const investor = createToken({ ...base, role: "investor", lang: "en" });
+const developer = createToken({ ...base, role: "developer" });
+const expired = createToken({ ...base, role: "broker", exp: Date.now() - 1000 });
+const tampered = broker.slice(0, -3) + "aaa";
+console.log("BROKER=" + broker);
+console.log("INVESTOR=" + investor);
+console.log("DEVELOPER=" + developer);
+console.log("EXPIRED=" + expired);
+console.log("TAMPERED=" + tampered);
+console.log("verify(broker):", verifyToken(broker)?.role);
+console.log("verify(expired):", verifyToken(expired));
+console.log("verify(tampered):", verifyToken(tampered));

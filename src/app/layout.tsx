@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Manrope, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@/components/site/Analytics";
@@ -38,6 +38,8 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
+
+export const viewport: Viewport = { themeColor: "#F6F5F1" };
 
 export default function RootLayout({
   children,
