@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Button } from "@/components/Button";
 import { copy, type Lang } from "@/content/copy";
+import { blur } from "@/lib/blur";
 
 export function Hero({ lang }: { lang: Lang }) {
   return (
@@ -10,17 +11,29 @@ export function Hero({ lang }: { lang: Lang }) {
         alt={copy.figs.hero.alt[lang]}
         fill
         priority
+        fetchPriority="high"
+        placeholder="blur"
+        blurDataURL={blur.hero}
         sizes="100vw"
         className="object-cover"
         style={{ objectPosition: "center 40%" }}
       />
-      {/* Velo galería (nunca negro): fuerte a la izquierda para sostener el texto grafito. */}
+      {/* Velo galería (nunca negro). Desktop: fuerte a la izquierda. */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 hidden md:block"
         aria-hidden
         style={{
           background:
             "linear-gradient(100deg, rgba(246,245,241,0.94) 0%, rgba(246,245,241,0.82) 28%, rgba(246,245,241,0.30) 58%, rgba(246,245,241,0) 82%)",
+        }}
+      />
+      {/* Móvil: velo vertical pensado para el texto centrado, de arriba hacia abajo. */}
+      <div
+        className="absolute inset-0 md:hidden"
+        aria-hidden
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(246,245,241,0.92) 0%, rgba(246,245,241,0.85) 42%, rgba(246,245,241,0.55) 68%, rgba(246,245,241,0.12) 88%, rgba(246,245,241,0) 100%)",
         }}
       />
 

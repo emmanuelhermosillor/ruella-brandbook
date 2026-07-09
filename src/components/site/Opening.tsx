@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Section } from "@/components/Section";
 import { Button } from "@/components/Button";
 import { copy, type Lang } from "@/content/copy";
+import { blur } from "@/lib/blur";
 
 export function Opening({ lang }: { lang: Lang }) {
   return (
@@ -27,9 +28,10 @@ export function Opening({ lang }: { lang: Lang }) {
           src="/img/opening.jpg"
           alt={copy.figs.opening.alt[lang]}
           fill
+          placeholder="blur"
+          blurDataURL={blur.opening}
           sizes="(min-width: 768px) 90vw, 100vw"
           className="object-cover"
-          style={{ objectPosition: "center 55%" }}
         />
         <figcaption className="absolute bottom-5 left-5 font-mono text-[10px] uppercase tracking-[0.22em] text-galeria/85 mix-blend-difference">
           {copy.figs.opening.caption[lang]}

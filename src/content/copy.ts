@@ -353,8 +353,8 @@ export const copy = {
       caption: { es: "Plate 01 · La mesa · DTS", en: "Plate 01 · The table · DTS" },
     },
     opening: {
-      alt: { es: "Ramas iluminadas a contraluz alcanzando el cielo.", en: "Backlit branches reaching toward the sky." },
-      caption: { es: "Fig. 002 · Luz que se abre · DTS", en: "Fig. 002 · Light breaking · DTS" },
+      alt: { es: "Cala frente al mar: lanchas sobre agua turquesa y roca de granito, costa de Los Cabos.", en: "A seafront cove: small boats on turquoise water and granite rock, the Los Cabos coast." },
+      caption: { es: "Fig. 002 · Frente al mar · Los Cabos · DTS", en: "Fig. 002 · By the sea · Los Cabos · DTS" },
     },
     gate: {
       alt: { es: "Hojas verdes en penumbra, en calma.", en: "Green fronds in soft shade, at rest." },

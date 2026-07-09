@@ -4,6 +4,7 @@ import Image from "next/image";
 import { track } from "@vercel/analytics";
 import { useLang } from "@/lib/useLang";
 import { copy, type Lang } from "@/content/copy";
+import { blur } from "@/lib/blur";
 import { surveys, type SurveyQuestion } from "@/content/surveys";
 import { Nav } from "./Nav";
 import { Footer } from "./Footer";
@@ -157,6 +158,8 @@ function SurveyForm({
                     src="/img/gate.jpg"
                     alt={copy.figs.gate.alt[lang]}
                     fill
+                    placeholder="blur"
+                    blurDataURL={blur.gate}
                     sizes="(min-width: 768px) 820px, 100vw"
                     className="object-cover"
                     style={{ objectPosition: "center 35%" }}

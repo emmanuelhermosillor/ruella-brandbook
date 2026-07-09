@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Manrope, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@/components/site/Analytics";
 import { ConsentBanner } from "@/components/site/ConsentBanner";
+import { HashScroll } from "@/components/site/HashScroll";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -53,6 +54,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-galeria text-grafito">
         {children}
+        <HashScroll />
         <ConsentBanner />
         <Analytics />
       </body>

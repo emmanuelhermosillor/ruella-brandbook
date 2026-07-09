@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Section } from "@/components/Section";
 import { Label } from "@/components/Label";
 import { copy, type Lang } from "@/content/copy";
+import { blur } from "@/lib/blur";
 
 export function Casa({ lang }: { lang: Lang }) {
   return (
@@ -25,6 +26,8 @@ export function Casa({ lang }: { lang: Lang }) {
             src="/img/casa.jpg"
             alt={copy.figs.casa.alt[lang]}
             fill
+            placeholder="blur"
+            blurDataURL={blur.casa}
             sizes="(min-width: 768px) 45vw, 100vw"
             className="object-cover"
           />

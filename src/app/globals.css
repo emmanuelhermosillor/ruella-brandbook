@@ -20,7 +20,7 @@
   --tracking-label: 0.26em;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
 
 /* Gate ceremonial — transición entre pasos (fade + leve desplazamiento). */
 @keyframes ruellaStepIn {

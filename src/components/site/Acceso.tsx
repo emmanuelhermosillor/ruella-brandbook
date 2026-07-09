@@ -5,6 +5,7 @@ import { track } from "@vercel/analytics";
 import { Section } from "@/components/Section";
 import { copy, type Lang } from "@/content/copy";
 import { pinned, countries, defaultDial } from "@/lib/countries";
+import { blur } from "@/lib/blur";
 import { Turnstile } from "./Turnstile";
 
 type Role = "investor" | "broker" | "developer";
@@ -25,6 +26,8 @@ function GateAtmosphere({ lang, done, variant }: { lang: Lang; done: boolean; va
         src="/img/gate.jpg"
         alt={copy.figs.gate.alt[lang]}
         fill
+        placeholder="blur"
+        blurDataURL={blur.gate}
         sizes={sizes}
         className={`object-cover transition-opacity duration-500 ${done ? "opacity-0" : "opacity-100"}`}
         style={{ objectPosition: "center" }}
@@ -33,6 +36,8 @@ function GateAtmosphere({ lang, done, variant }: { lang: Lang; done: boolean; va
         src="/img/gate-success.jpg"
         alt={copy.figs.gateSuccess.alt[lang]}
         fill
+        placeholder="blur"
+        blurDataURL={blur.gateSuccess}
         sizes={sizes}
         className={`object-cover transition-opacity duration-500 ${done ? "opacity-100" : "opacity-0"}`}
         style={{ objectPosition: "center" }}
