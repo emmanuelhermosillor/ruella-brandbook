@@ -10,7 +10,7 @@ export const copy = {
   nav: {
     casa: { es: "La Casa", en: "The House" },
     circulo: { es: "El Círculo", en: "The Circle" },
-    opening: { es: "El Opening", en: "The Opening" },
+    opening: { es: "La Apertura", en: "The Opening" },
     acceso: { es: "Acceso", en: "Access" },
     cta: { es: "Solicitar acceso", en: "Request access" },
   },
@@ -72,7 +72,7 @@ export const copy = {
   },
 
   opening: {
-    label: { es: "Opening No. 001", en: "Opening No. 001" },
+    label: { es: "La Apertura No. 001", en: "Opening No. 001" },
     place: { es: "The Cliff Club · Los Cabos", en: "The Cliff Club · Los Cabos" },
     body: {
       es: "Un nuevo proyecto llega a Ruella. Tu invitación está por llegar, a tu nombre.",
@@ -81,7 +81,7 @@ export const copy = {
     cta: { es: "Solicitar acceso", en: "Request access" },
   },
 
-  // Nota sobre el nombre — sección breve en /, después del Opening.
+  // Nota sobre el nombre — sección breve en /, después de La Apertura.
   nombre: {
     label: { es: "El nombre", en: "The name" },
     body: {
