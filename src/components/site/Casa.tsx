@@ -26,7 +26,9 @@ export function Casa({ lang }: { lang: Lang }) {
           </Reveal>
         </div>
 
-        <Reveal delay={120} className="relative aspect-[4/5] w-full overflow-hidden border border-linea">
+        {/* Sin revelado: el pie usa mix-blend-difference y una opacidad
+            intermedia lo rompería. */}
+        <div className="relative aspect-[4/5] w-full overflow-hidden border border-linea">
           <Image
             src="/img/casa.jpg"
             alt={copy.figs.casa.alt[lang]}
@@ -39,7 +41,7 @@ export function Casa({ lang }: { lang: Lang }) {
           <span className="absolute bottom-6 left-6 font-mono text-[10px] uppercase tracking-[0.22em] text-galeria/80 mix-blend-difference">
             {copy.figs.casa.caption[lang]}
           </span>
-        </Reveal>
+        </div>
       </div>
     </Section>
   );

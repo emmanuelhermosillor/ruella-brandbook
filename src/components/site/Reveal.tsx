@@ -3,16 +3,29 @@
 import { useEffect, useRef, type ReactNode } from "react";
 
 /**
- * Movimiento Galería: un solo gesto para todo el sitio.
+ * Interruptor único del movimiento. En false, Reveal no toca un solo estilo:
+ * el sitio queda quieto y completo.
  *
- * Regla de seguridad primero: el contenido nace VISIBLE. La animación solo
- * existe si <html> lleva la clase `reveal-on`, que el script del layout pone
- * únicamente cuando el navegador soporta IntersectionObserver y el usuario no
- * pidió menos movimiento. Sin JS, con JS lento o con un observador que falle,
- * el sitio se lee igual — nunca una página en blanco.
+ * APAGADO (22 jul): el revelado no se pudo verificar en un iPhone real y ya
+ * falló una vez ahí. El resto del ciclo —copy v2.1, espaciado, metadata y el
+ * video móvil— sí sale hoy. Se enciende con calma, verificando en dispositivo.
+ */
+export const MOTION = false;
+
+const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
+const DUR = 560;
+
+/**
+ * Movimiento Galería.
  *
- * El bloque entra con fundido y 12px de recorrido, una sola vez. Solo opacity
- * y transform: el CLS se queda en 0.
+ * Invariante: **nada se oculta por CSS**. El elemento nace visible en el HTML
+ * y sigue visible aunque el JS no corra, falle a medias o el observador nunca
+ * dispare. Solo este efecto puede ocultarlo, y únicamente en el instante en
+ * que va a animarlo — y solo si aún está fuera de la pantalla.
+ *
+ * Garantía dura: ningún elemento queda por debajo de opacidad 1 más de ~1s
+ * después de entrar al viewport. Tres redes: el observador, un vigilante que
+ * revisa la posición, y un plazo máximo absoluto.
  */
 export function Reveal({
   children,
@@ -29,16 +42,39 @@ export function Reveal({
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
-    if (!document.documentElement.classList.contains("reveal-on")) return;
+    if (!el || !MOTION) return;
 
-    const show = () => el.classList.add("is-in");
-
-    // Lo que ya está en pantalla entra de inmediato.
-    if (el.getBoundingClientRect().top < window.innerHeight * 0.92) {
-      show();
+    // Menos movimiento, o navegador sin observador: no se toca nada. Estado
+    // final desde el primer instante.
+    if (
+      typeof IntersectionObserver === "undefined" ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
       return;
     }
+
+    // Lo que ya se ve (o casi) jamás se oculta: evita parpadeos arriba del todo.
+    if (el.getBoundingClientRect().top < window.innerHeight * 1.05) return;
+
+    // A partir de aquí sí se oculta — un solo frame antes de animarlo.
+    el.style.willChange = "opacity, transform";
+    el.style.opacity = "0";
+    el.style.transform = "translateY(12px)";
+    el.style.transition = `opacity ${DUR}ms ${EASE} ${delay}ms, transform ${DUR}ms ${EASE} ${delay}ms`;
+
+    let done = false;
+    const show = () => {
+      if (done) return;
+      done = true;
+      el.style.opacity = "";
+      el.style.transform = "";
+      // Se limpia la transición para no dejar contexto de apilamiento vivo
+      // (rompería mix-blend-difference de los pies de figura).
+      window.setTimeout(() => {
+        el.style.transition = "";
+        el.style.willChange = "";
+      }, DUR + delay + 120);
+    };
 
     const io = new IntersectionObserver(
       ([e]) => {
@@ -47,24 +83,31 @@ export function Reveal({
           io.disconnect();
         }
       },
-      { threshold: 0.18, rootMargin: "0px 0px -5% 0px" },
+      { threshold: 0.15, rootMargin: "0px 0px -5% 0px" },
     );
     io.observe(el);
 
-    // Respaldo: si en 2.5s nadie lo reveló, se revela solo.
-    const t = window.setTimeout(show, 2500);
+    // Vigilante: si el elemento está en pantalla y sigue oculto, se muestra.
+    // Cubre a iOS Safari cuando el observador no dispara tras el scroll.
+    const watch = window.setInterval(() => {
+      if (done) return;
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) show();
+    }, 400);
+
+    // Red final: pase lo que pase, nada permanece oculto indefinidamente.
+    const cap = window.setTimeout(show, 6000);
+
     return () => {
-      window.clearTimeout(t);
       io.disconnect();
+      window.clearInterval(watch);
+      window.clearTimeout(cap);
+      show();
     };
-  }, []);
+  }, [delay]);
 
   return (
-    <Tag
-      ref={ref as React.Ref<HTMLDivElement & HTMLLIElement>}
-      className={`reveal ${className}`}
-      style={{ transitionDelay: delay ? `${delay}ms` : undefined }}
-    >
+    <Tag ref={ref as React.Ref<HTMLDivElement & HTMLLIElement>} className={className}>
       {children}
     </Tag>
   );

@@ -31,7 +31,8 @@ export function Opening({ lang }: { lang: Lang }) {
       </div>
 
       {/* Horizontal evocadora — anticipación. Teaser, no álbum. */}
-      <Reveal as="figure" className="relative mt-16 aspect-[16/7] w-full overflow-hidden border border-linea">
+      {/* Sin revelado: mismo motivo que en La Casa (pie con mix-blend). */}
+      <figure className="relative mt-16 aspect-[16/7] w-full overflow-hidden border border-linea">
         <Image
           src="/img/opening.jpg"
           alt={copy.figs.opening.alt[lang]}
@@ -44,7 +45,7 @@ export function Opening({ lang }: { lang: Lang }) {
         <figcaption className="absolute bottom-5 left-5 font-mono text-[10px] uppercase tracking-[0.22em] text-galeria/85 mix-blend-difference">
           {copy.figs.opening.caption[lang]}
         </figcaption>
-      </Reveal>
+      </figure>
     </Section>
   );
 }
