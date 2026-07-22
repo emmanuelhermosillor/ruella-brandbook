@@ -18,53 +18,107 @@ export const copy = {
   hero: {
     eyebrow: { es: "Ruella · Quietly first.", en: "Ruella · Quietly first." },
     title: { es: "Lo extraordinario es para muy pocos.", en: "The extraordinary, for the very few." },
-    sub: { es: "Una casa de curaduría de real estate. Se entra por invitación.", en: "Curated real estate. By invitation only." },
+    sub: {
+      es: "Una casa que cura. Un círculo que permanece. Se entra por invitación.",
+      en: "A house that curates. A circle that lasts. Entry by invitation.",
+    },
     cta: { es: "Solicitar acceso", en: "Request access" },
   },
 
   casa: {
     label: { es: "La Casa", en: "The House" },
-    title: { es: "No somos una inmobiliaria. Somos una casa que cura.", en: "We don't sell real estate. We curate it." },
+    title: {
+      es: "El lujo inmobiliario es ruidoso, y casi todo ese ruido es gris.",
+      en: "Luxury real estate is loud, and most of that noise is grey.",
+    },
     body1: {
-      es: "Curamos las etapas tempranas de proyectos de lujo y abrimos el acceso a un círculo elegido con cuidado. Examinamos cada proyecto a fondo — si algo llega a ti por Ruella, es porque vale tu tiempo.",
-      en: "We curate exceptional projects from their earliest stage and open them to a small, hand-picked circle. Everything is vetted, properly — if it reaches you through Ruella, it's worth your time.",
+      es: "Ruella nace en contra de eso. No somos una inmobiliaria. Somos una casa que cura: analizamos cada proyecto a profundidad, establecemos el método, y damos el vamos solo cuando es digno de salir al mercado. El rigor, para nosotros, es la forma más alta de hospitalidad.",
+      en: "Ruella exists against that. We are not a brokerage. We are a house that curates: we study a project to its depths, we set the method, and we give our word only when it deserves to reach the market. Rigour, to us, is the highest form of hospitality.",
     },
-    // El rol de la casa, dicho por lo que sí hacemos (v2).
     body2: {
-      es: "Nuestro oficio es coordinar. En cada proyecto que tomamos establecemos la estrategia comercial — el estándar, las reglas, la forma de medir — y convocamos a los asesores e inversionistas que la hacen suceder. El desarrollador construye. El asesor vende. Ruella cuida que todo ocurra como debe.",
-      en: "Our work is coordination. On every project we take on, we set the commercial strategy — the standards, the rules, the way results are measured — and we bring in the brokers and investors who make it happen. Developers build. Brokers sell. Ruella makes sure the whole thing runs the way it should.",
+      es: "Pero lo que reunimos no son propiedades. Es gente. Los mejores negocios ocurren entre pares, dentro de un círculo elegido con cuidado. El inmueble es la ocasión; el círculo es el patrimonio.",
+      en: "But what we gather is not properties. It is people. The best business happens between peers, inside a circle chosen with care. The property is the occasion; the circle is what you keep.",
     },
-    body3: {
-      es: "Nuestra promesa es certeza: criterio en lo que elegimos, verdad en lo que ponemos frente a ti, y un lugar entre quienes hacen las cosas a conciencia.",
-      en: "Our promise is certainty: judgment in what we choose, truth in what we place in front of you, and a seat among people who do things properly.",
+    seal: {
+      es: "Una casa. Un círculo. Una forma de hacer las cosas.",
+      en: "A house. A circle. A way of doing things.",
+    },
+    // Durand-Ruel como alusión; el origen se cuenta a fondo en materiales.
+    nombre: {
+      es: "El nombre viene de un marchante que en 1872 vio valor donde el mercado aún no sabía mirar.",
+      en: "The name comes from a dealer who, in 1872, saw value where the market had yet to look.",
     },
   },
 
-  // El respaldo: Grubsa = origen · BAS Holding = grupo · Ruella = parte del grupo.
   respaldo: {
     label: { es: "El Respaldo", en: "The Backing" },
     title: {
-      es: "Cuarenta años construyendo detrás de cada puerta que abrimos.",
-      en: "Forty years of building stand behind every door we open.",
+      es: "Detrás de Ruella hay una obra construida, no una promesa.",
+      en: "Behind Ruella there is a body of work, not a promise.",
     },
-    body: {
-      es: "Ruella es parte de BAS Holding, el grupo que reúne a Grubsa, Adria Capital y Ruella. De Grubsa nace todo — más de cuarenta años desarrollando, y la razón de que exista lo demás. Lo que eso significa en la práctica es simple: los proyectos que abrimos tienen quien los construye, y un grupo que responde por ellos.",
-      en: "Ruella is part of BAS Holding, the group that brings together Grubsa, Adria Capital and Ruella. Grubsa is where it began — more than forty years developing real estate, and the reason the rest exists. What that means in practice is simple: the projects we open have someone who builds them, and a group that answers for them.",
+    body1: {
+      es: "De Grubsa nace todo: la desarrolladora que lleva más de cuatro décadas construyendo y entregando. De esa escuela —la del oficio, el detalle y la palabra cumplida— viene la nuestra.",
+      en: "Everything begins with Grubsa: the developer that has spent more than four decades building and delivering. That school — craft, detail, a word kept — is where ours comes from.",
+    },
+    body2: {
+      es: "Ruella es parte de BAS Holding, el grupo que reúne bajo un mismo techo a Grubsa, a Adria Capital y a la casa: quien construye, quien desarrolla y quien coordina cómo el proyecto llega al mercado.",
+      en: "Ruella is part of BAS Holding, the group that brings under one roof Grubsa, Adria Capital and the house itself: the one who builds, the one who develops, and the one who coordinates how a project reaches the market.",
+    },
+    body3: {
+      es: "Para ti, eso significa una sola cosa: certeza. Cuando la casa confirma algo, está confirmado —porque lo confirmamos en la fuente, no de segunda mano.",
+      en: "For you that means one thing: certainty. When the house confirms something, it is confirmed — because we confirm it at the source, not second-hand.",
+    },
+  },
+
+  rol: {
+    label: { es: "El Rol", en: "The Role" },
+    title: {
+      es: "Somos la mesa donde los tres lados se encuentran.",
+      en: "We are the table where the three sides meet.",
+    },
+    body1: {
+      es: "Ruella coordina la comercialización de los proyectos que cura. No es el desarrollador ni una agencia: es quien pone el sistema, las buenas prácticas y el estándar para que las cosas sucedan.",
+      en: "Ruella coordinates how the projects it curates reach the market. Not the developer, not an agency: the one who sets the system, the standard and the practices that make things happen.",
+    },
+    body2: {
+      es: "Atraemos a los asesores y a los inversionistas correctos, ponemos las reglas a la vista, y cuidamos que el precio y la palabra sean los mismos para todos. No competimos con quien vende —coordinamos para que venda mejor.",
+      en: "We bring in the right brokers and the right investors, we put the rules in plain sight, and we make sure the price and the word are the same for everyone. We don't compete with whoever sells — we coordinate so they sell better.",
+    },
+    body3: {
+      es: "El desarrollador, el inversionista y el asesor, en una misma mesa, bajo reglas claras. En esa mesa, todos ganan.",
+      en: "Developer, investor and broker, at one table, under clear rules. At that table, everyone wins.",
+    },
+  },
+
+  curaduria: {
+    label: { es: "La Curaduría", en: "The Assessment" },
+    title: { es: "Lo que no pasa, no llega a tu mesa.", en: "What doesn't pass never reaches your table." },
+    body1: {
+      es: "Todo lo que llega a la casa pasa por El Dictamen: nuestro propio análisis de cada proyecto, hecho con el rigor de quien va a poner su nombre encima. El terreno, los permisos, los números, la letra chica —lo que casi nadie estudia.",
+      en: "Everything that enters the house goes through The Assessment: our own study of a project, done with the rigour of someone about to put their name on it. The land, the permits, the numbers, the fine print — what almost no one reads.",
+    },
+    body2: {
+      es: "Cuando algo llega a ti por Ruella, ya cargó con la pregunta difícil. Tú recibes lo que quedó del lado correcto del filtro.",
+      en: "By the time something reaches you through Ruella, it has already carried the difficult question. What you receive is what stayed on the right side of the filter.",
+    },
+    body3: {
+      es: "Como en una casa de relojes, las preguntas correctas encaminan a cada cliente a la pieza que le corresponde.",
+      en: "As in a watch house, the right questions lead each client to the piece that belongs to them.",
     },
   },
 
   circulo: {
     label: { es: "El Círculo", en: "The Circle" },
     title: { es: "Se entra por una oportunidad. Se queda por la compañía.", en: "You come for an opportunity. You stay for the company." },
-    sub: { es: "El inmueble es la ocasión; el círculo es el patrimonio.", en: "The property is the occasion. The circle is what lasts." },
+    sub: { es: "El inmueble es la ocasión; el círculo es el patrimonio.", en: "The property is the occasion. The circle is what you keep." },
     items: [
       {
         n: "01",
         href: "/inversionistas",
         title: { es: "Para compradores e inversionistas", en: "For buyers & investors" },
         body: {
-          es: "Producto curado que no está afuera, abierto temprano — y un grupo detrás que responde por la obra.",
-          en: "Vetted opportunities you won't find listed, opened early — with a group behind them that answers for the build.",
+          es: "Lo que llega a ti ya cargó con la pregunta difícil.",
+          en: "What reaches you already carried the difficult question.",
         },
       },
       {
@@ -72,8 +126,8 @@ export const copy = {
         href: "/brokers",
         title: { es: "Para asesores y agencias", en: "For agents & brokerages" },
         body: {
-          es: "Inventario que nadie más tiene, tu comisión completa y tu cliente registrado a tu nombre.",
-          en: "Inventory no one else holds, your commission whole, and your client registered under your name.",
+          es: "Inventario que no está afuera. Tu comisión completa, tu cliente tuyo.",
+          en: "Inventory that isn't out there. Your commission whole, your client yours.",
         },
       },
       {
@@ -81,8 +135,8 @@ export const copy = {
         href: "/desarrolladores",
         title: { es: "Para desarrolladores", en: "For developers" },
         body: {
-          es: "Absorción temprana sin tocar tu precio público, y un sistema comercial con reglas y reportes de verdad.",
-          en: "Early absorption with your public pricing untouched, and a commercial system with rules and real reporting.",
+          es: "Tu proyecto llega al mercado con método —y tu precio público intacto.",
+          en: "Your project reaches the market with method — and your public price intact.",
         },
       },
     ],
@@ -92,29 +146,30 @@ export const copy = {
   opening: {
     label: { es: "La Apertura No. 001", en: "Opening No. 001" },
     place: { es: "The Cliff Club · Los Cabos", en: "The Cliff Club · Los Cabos" },
-    body: {
-      es: "Un nuevo proyecto llega a Ruella. Su dictamen técnico está obtenido y las licencias avanzan al 60% — dicho sin énfasis, porque es simplemente donde está el proyecto. Tu invitación está por llegar, a tu nombre.",
-      en: "A new project is coming to Ruella. Its technical assessment is complete and permitting stands at sixty per cent — said plainly, because that is simply where the project is. Your invitation will arrive with your name on it.",
+    body1: {
+      es: "La primera apertura de la casa lleva un nombre: The Cliff Club, en Los Cabos. Una casa sobre un acantilado frente al Pacífico, abierta en el momento del ciclo en que llegar antes todavía vale.",
+      en: "The first opening of the house has a name: The Cliff Club, in Los Cabos. A house on a cliff facing the Pacific, opened at the point in the cycle when arriving early still counts.",
     },
+    body2: {
+      es: "El dictamen técnico del proyecto ya está sellado —era el hito más exigente del camino— y el proceso de licencias supera la mitad del recorrido.",
+      en: "Its technical assessment is already sealed — the most demanding milestone of the way — and licensing is past the halfway mark.",
+    },
+    body3: {
+      es: "Es la primera —no la única. La casa abre torre a torre, plaza a plaza. Los que están desde el principio van primero en todo lo que sigue.",
+      en: "It is the first — not the only. The house opens tower by tower, address by address. Those who are here from the beginning go first in everything that follows.",
+    },
+    note: { es: "Sujeto a disponibilidad.", en: "Subject to availability." },
     cta: { es: "Solicitar acceso", en: "Request access" },
-  },
-
-  // Nota sobre el nombre — sección breve en /, después de La Apertura.
-  nombre: {
-    label: { es: "El nombre", en: "The name" },
-    body: {
-      es: "Ruella toma su nombre de Paul Durand-Ruel, el marchante que en 1872 vio valor donde el mercado aún no sabía mirar. De él tomamos una sola cosa: la disciplina de ver lo que otros no ven, y de elegir con criterio. El resto lo construimos nosotros.",
-      en: "Ruella takes its name from Paul Durand-Ruel, the dealer who in 1872 saw value where the market had yet to look. From him we take one thing: the discipline of seeing what others miss, and choosing with judgment. The rest is ours to build.",
-    },
   },
 
   acceso: {
     label: { es: "Acceso", en: "Access" },
-    title: { es: "Esta puerta no aparece en buscadores.", en: "No one finds this page by accident." },
+    title: { es: "Empezar es una conversación, no un formulario.", en: "Starting is a conversation, not a form." },
     body: {
-      es: "Se entra por invitación, y toda invitación empieza por una conversación. Cuéntanos quién eres; te responde un humano de la casa.",
-      en: "Entry is by invitation, and every invitation starts with a conversation. Tell us who you are — a real person will reply.",
+      es: "Nos sentamos, te contamos qué hay abierto y, si hay encaje, tu invitación llega a tu nombre. A veces decimos que no —con la puerta abierta; es honestidad sobre el momento, nunca sobre ti.",
+      en: "We sit down, we tell you what is open, and if there's a fit, your invitation arrives with your name on it. Sometimes we say no — with the door open. It's honesty about the moment, never about you.",
     },
+    invite: { es: "Cuando quieras, conversemos.", en: "Whenever you like, let's talk." },
 
     // Gate ceremonial multi-paso. Todos los campos son obligatorios.
     // q = pregunta (display), note = línea de apoyo (mono, discreta),
@@ -192,25 +247,54 @@ export const copy = {
   },
 
   perfiles: {
+    // Dos caminos dentro de una misma puerta: El Círculo (asesor) y Las Alianzas (agencia).
     brokers: {
       label: { es: "El Círculo · Para asesores y agencias", en: "The Circle · For agents & brokerages" },
       title: { es: "Tu comisión, completa. Tu cliente, a tu nombre.", en: "Your commission stays whole. Your client stays yours." },
-      paras: {
-        es: [
-          "Los mejores asesores pasan su carrera peleando por el mismo inventario que tienen todos. Ruella trabaja al revés.",
-          "Nuestro oficio es coordinar, no vender. Curamos proyectos que no salen al mercado, ponemos las reglas con las que todos juegan y te entregamos lo que nadie más tiene. La relación es tuya: cada conversación con tu cliente pasa por ti.",
-          "Tu comisión no se reparte: es tuya, completa. Y tu cliente queda registrado a tu nombre.",
-          "Detrás de los proyectos está BAS Holding, el grupo que nació de Grubsa en cuarenta años de obra. Lo que le llevas a tu cliente tiene quién responda por él.",
-          "Se entra por invitación. Si tu oficio es el lujo y lo tratas como oficio, hay una silla que podría ser tuya.",
-        ],
-        en: [
-          "The best brokers spend their careers fighting over the same inventory as everyone else. Ruella works the other way around.",
-          "Our role is to coordinate, not to sell. We curate projects that never get listed, set the rules everyone works by, and hand you what no one else holds. The relationship is yours — every conversation with your client goes through you.",
-          "Your commission is never split — it's yours, whole. Your client is registered under your name.",
-          "Behind the projects stands BAS Holding, the group that grew out of Grubsa over forty years of building. What you bring your client has someone standing behind it.",
-          "Entry is by invitation. If the high end is your craft, there may be a seat here for you.",
-        ],
+      intro: {
+        es: "Dos puertas, un mismo estándar: El Círculo, para el asesor que trabaja de tú a tú con su comprador; Las Alianzas, para la agencia que trae su marca y su equipo.",
+        en: "Two ways in, one standard: The Circle, for the broker who works face to face with their buyer; The Alliances, for the house that brings its brand and its team.",
       },
+      vias: [
+        {
+          label: { es: "El Círculo · El asesor", en: "The Circle · The broker" },
+          items: {
+            es: [
+              "Inventario que no está afuera: curado, en etapa temprana, no quemado.",
+              "La comisión completa, sin split, desde que entras.",
+              "Tu cliente, registrado a tu nombre; la casa nunca compite contra ti.",
+              "Un concierge que carga el expediente, lo legal y la coordinación: tu trabajo es la relación.",
+              "Reglas a la vista, iguales para todos, y un lugar que crece cuando vendes — A · AA · AAA.",
+            ],
+            en: [
+              "Inventory that isn't out there — curated, early, unburned.",
+              "Your commission whole, no split, from the day you walk in.",
+              "Your client registered under your name; the house never competes with you.",
+              "A concierge who carries the file, the legal and the coordination: your work is the relationship.",
+              "Rules in plain sight, the same for everyone, and a place that grows as you sell — A · AA · AAA.",
+            ],
+          },
+          close: { es: "Se entra por invitación. Hay una silla que podría ser tuya.", en: "Entry is by invitation. There may be a seat here for you." },
+        },
+        {
+          label: { es: "Las Alianzas · La agencia", en: "The Alliances · The brokerage" },
+          items: {
+            es: [
+              "Inventario exclusivo, no quemado, en el momento del ciclo en que más deja —para tu equipo.",
+              "Tu casa conserva lo suyo: tu marca, tu equipo, tu cartera, tu reparto.",
+              "Un programa por niveles A · AA · AAA que se gana con desempeño, no con membrete.",
+              "El registro protege a tu gente: la cartera de tu equipo es de tu equipo, hoy y siempre.",
+            ],
+            en: [
+              "Exclusive inventory, unburned, at the point in the cycle where it pays most — for your team.",
+              "Your house keeps what is yours: your brand, your team, your book, your split.",
+              "A tiered programme — A · AA · AAA — earned by performance, not by letterhead.",
+              "The register protects your people: your team's book belongs to your team, today and always.",
+            ],
+          },
+          close: { es: "Coordinamos, no competimos. La paridad es innegociable.", en: "We coordinate, we don't compete. Parity is non-negotiable." },
+        },
+      ],
       cta: { es: "Solicitar acceso", en: "Request access" },
     },
     inversionistas: {
@@ -218,18 +302,18 @@ export const copy = {
       title: { es: "El acceso es el verdadero lujo.", en: "Access is the real luxury." },
       paras: {
         es: [
-          "Todo proyecto extraordinario tiene un tramo que no se anuncia: se abre, en privado, a un círculo elegido con cuidado. Ruella cura ese tramo y lo pone en tu mesa.",
-          "Aquí no compras un folleto: compras un proyecto que pasó El Dictamen de la casa. La mayoría no pasa; eso es exactamente lo que vale el que sí.",
-          "Cada proyecto que abrimos está respaldado por BAS Holding — Grubsa, Adria Capital y Ruella bajo un mismo grupo, y más de cuarenta años de obra detrás.",
-          "Nunca un carrito, siempre una conversación. Un humano de la casa te acompaña de principio a fin, a tu ritmo, con condiciones por escrito y sujeto a disponibilidad.",
-          "Si valoras el acceso que no se anuncia, hay una conversación que vale la pena tener.",
+          "Todo proyecto extraordinario tiene un tramo que no se anuncia. Ese es el tramo que cura la casa.",
+          "Lo que llega a ti ya cargó con la pregunta difícil —El Dictamen: el terreno, los permisos, los números, la letra chica. Tú recibes lo que quedó del lado correcto del filtro.",
+          "Y detrás, una obra construida y no una promesa: Grubsa lleva más de cuatro décadas construyendo y entregando, y Ruella es parte del mismo grupo.",
+          "Como en una casa de relojes, las preguntas correctas te encaminan a la pieza que te corresponde. Nunca un carrito, siempre una conversación —a tu ritmo, por escrito y sujeto a disponibilidad.",
+          "El inmueble es la ocasión; el círculo es el patrimonio.",
         ],
         en: [
-          "Every exceptional project has a stage that's never advertised — opened privately, to a circle chosen with care. That is the stage Ruella curates.",
-          "You're not buying a brochure here. You're buying a project that passed The Assessment — most don't, and that's precisely the point.",
-          "Every project we open is backed by BAS Holding — Grubsa, Adria Capital and Ruella under one group, with more than forty years of building behind it.",
-          "Never a cart, always a conversation. Someone from Ruella walks with you from start to finish, at your pace, with terms in writing — subject to availability.",
-          "If quiet access is what you value, this conversation is worth having.",
+          "Every exceptional project has a stage that is never advertised. That is the stage the house curates.",
+          "What reaches you already carried the difficult question — The Assessment: the land, the permits, the numbers, the fine print. You receive what stayed on the right side of the filter.",
+          "And behind it, a body of work rather than a promise: Grubsa has been building and delivering for more than four decades, and Ruella is part of the same group.",
+          "As in a watch house, the right questions lead you to the piece that belongs to you. Never a cart, always a conversation — at your pace, in writing, subject to availability.",
+          "The property is the occasion; the circle is what you keep.",
         ],
       },
       cta: { es: "Solicitar acceso", en: "Request access" },
@@ -239,19 +323,17 @@ export const copy = {
       title: { es: "Absorción temprana. Tu precio público, intacto.", en: "Early absorption. Your public pricing, untouched." },
       paras: {
         es: [
-          "Las primeras etapas piden lo más difícil: vender con convicción antes de que el mercado la tenga. Ruella existe para ese tramo.",
-          "Coordinamos el frente comercial: la estrategia, las reglas con las que trabajan los asesores, y la forma en que se mide y se reporta. Tú sigues construyendo; nosotros hacemos que la máquina comercial corra.",
-          "Colocamos tus primeras etapas dentro de un círculo curado — inversionistas y asesores bajo reglas claras — sin publicidad, sin ruido, y con tu lista pública protegida.",
-          "Lo que Ruella firma pasó El Dictamen, y se reporta con disciplina. Ese sello cuida tu proyecto tanto como al comprador.",
-          "Conocemos el oficio desde adentro: Ruella es parte de BAS Holding, el grupo con el que Grubsa desarrolla desde hace más de cuarenta años.",
+          "Las primeras etapas piden lo más difícil: vender con convicción antes de que el mercado la tenga.",
+          "Ruella coordina ese tramo. Ponemos el sistema, el estándar y las buenas prácticas —y convocamos a los asesores y a los inversionistas que lo hacen suceder. No competimos con quien vende; coordinamos para que venda mejor.",
+          "Una regla por encima de todas: paridad. El precio y las condiciones del comprador son idénticos en todos los caminos, siempre. Tu precio público se queda donde tú lo pusiste.",
+          "Nada lleva el nombre de Ruella sin pasar El Dictamen, y todo se reporta con disciplina —porque lo confirmamos en la fuente, no de segunda mano.",
           "Trabajamos con pocos proyectos a la vez, elegidos con criterio. Si el tuyo tiene el calibre, hablemos.",
         ],
         en: [
-          "The earliest stage asks the hardest thing of a developer: selling with conviction before the market has any. That stage is our specialty.",
-          "We coordinate the commercial side of it: the strategy, the rules brokers work by, and the way results are measured and reported. You keep building; we make the commercial engine run.",
-          "We place your early stages inside a curated circle — investors and brokers under clear rules — with no advertising, no noise, and your pricing protected.",
-          "Nothing carries the Ruella name without passing The Assessment, and everything we do is reported with discipline. That protects your project as much as the buyer.",
-          "We know the work from the inside: Ruella is part of BAS Holding, the group Grubsa has been developing with for more than forty years.",
+          "The earliest stage asks the hardest thing of a developer: selling with conviction before the market has any.",
+          "Ruella coordinates that stage. We set the system, the standard and the practices — and we bring in the brokers and investors who make it happen. We don't compete with whoever sells; we coordinate so they sell better.",
+          "One rule above the rest: parity. The buyer's price and terms are identical through every route, always. Your public price stays where you put it.",
+          "Nothing carries the Ruella name without passing The Assessment, and everything is reported with discipline — because we confirm at the source, not second-hand.",
           "We take on a few projects at a time, chosen carefully. If yours has the caliber, let's talk.",
         ],
       },
@@ -362,8 +444,8 @@ export const copy = {
 
   footer: {
     disclaimer: {
-      es: "Las proyecciones no constituyen garantía de rendimiento. Todo sujeto a disponibilidad.",
-      en: "Projections are not a guarantee of returns. Subject to availability.",
+      es: "Ruella no promete rendimientos. Todo sujeto a disponibilidad. Nada de este material constituye asesoría legal o fiscal.",
+      en: "Ruella does not promise returns. Subject to availability. Nothing here constitutes legal or tax advice.",
     },
     privacy: { es: "Aviso de privacidad", en: "Privacy Notice" },
   },

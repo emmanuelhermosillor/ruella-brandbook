@@ -196,6 +196,7 @@ export function Acceso({ lang, defaultRole }: { lang: Lang; defaultRole?: Role }
               {t.title[lang]}
             </h2>
             <p className="mt-7 font-body text-[16px] font-light leading-relaxed text-grafito/70">{t.body[lang]}</p>
+            <p className="mt-6 font-mono text-[11px] uppercase tracking-label text-grafito/50">{t.invite[lang]}</p>
           </div>
 
           <div className="mt-12 w-full max-w-[560px]">

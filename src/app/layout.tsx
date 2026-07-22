@@ -60,6 +60,16 @@ export default function RootLayout({
       lang="en"
       className={`${cormorant.variable} ${manrope.variable} ${plexMono.variable} h-full`}
     >
+      <head>
+        {/* Enciende el movimiento sólo si el navegador puede observarlo y el
+            usuario no pidió menos animación. Si esto no corre, todo se ve. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('reveal-on')}}catch(e){}",
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-galeria text-grafito">
         {children}
         <HashScroll />
