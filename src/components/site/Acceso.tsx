@@ -44,7 +44,13 @@ function GateAtmosphere({ lang, done, variant }: { lang: Lang; done: boolean; va
       />
       {/* Velo nácar sutil para que el caption y el borde respiren. */}
       <div className="pointer-events-none absolute inset-0" aria-hidden style={{ background: "linear-gradient(0deg, rgba(237,235,228,0.35) 0%, rgba(237,235,228,0) 45%)" }} />
-      <figcaption className="absolute bottom-5 left-5 z-10 font-mono text-[10px] uppercase tracking-[0.22em] text-galeria/85 mix-blend-difference">
+      {/* Velo suave para que el pie se lea sobre cualquier foto. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-24"
+        style={{ background: "linear-gradient(0deg, rgba(42,42,40,0.38) 0%, rgba(42,42,40,0) 100%)" }}
+      />
+      <figcaption className="absolute bottom-5 left-5 z-10 font-mono text-[10px] uppercase tracking-[0.22em] text-galeria">
         {done ? copy.figs.gateSuccess.caption[lang] : copy.figs.gate.caption[lang]}
       </figcaption>
     </figure>

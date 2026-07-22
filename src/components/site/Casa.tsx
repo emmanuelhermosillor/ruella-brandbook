@@ -26,7 +26,7 @@ export function Casa({ lang }: { lang: Lang }) {
           </Reveal>
         </div>
 
-        {/* Sin revelado: el pie usa mix-blend-difference y una opacidad
+        {/* Sin revelado: el pie usa y una opacidad
             intermedia lo rompería. */}
         <div className="relative aspect-[4/5] w-full overflow-hidden border border-linea">
           <Image
@@ -38,7 +38,13 @@ export function Casa({ lang }: { lang: Lang }) {
             sizes="(min-width: 768px) 45vw, 100vw"
             className="object-cover"
           />
-          <span className="absolute bottom-6 left-6 font-mono text-[10px] uppercase tracking-[0.22em] text-galeria/80 mix-blend-difference">
+          {/* Velo suave para que el pie se lea sobre cualquier foto. */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-24"
+            style={{ background: "linear-gradient(0deg, rgba(42,42,40,0.38) 0%, rgba(42,42,40,0) 100%)" }}
+          />
+          <span className="absolute bottom-6 left-6 font-mono text-[10px] uppercase tracking-[0.22em] text-galeria">
             {copy.figs.casa.caption[lang]}
           </span>
         </div>

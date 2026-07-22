@@ -8,6 +8,28 @@ import { blur } from "@/lib/blur";
 export function Opening({ lang }: { lang: Lang }) {
   return (
     <Section id="opening">
+      {/* Sin revelado: mismo motivo que en La Casa (pie con mix-blend). */}
+      <figure className="relative mb-12 aspect-[4/3] w-full overflow-hidden border border-linea md:mb-14 md:aspect-[16/7]">
+        <Image
+          src="/img/opening.jpg"
+          alt={copy.figs.opening.alt[lang]}
+          fill
+          placeholder="blur"
+          blurDataURL={blur.opening}
+          sizes="(min-width: 768px) 90vw, 100vw"
+          className="object-cover"
+        />
+        {/* Velo suave para que el pie se lea sobre cualquier foto. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-24"
+        style={{ background: "linear-gradient(0deg, rgba(42,42,40,0.38) 0%, rgba(42,42,40,0) 100%)" }}
+      />
+      <figcaption className="absolute bottom-5 left-5 font-mono text-[10px] uppercase tracking-[0.22em] text-galeria">
+          {copy.figs.opening.caption[lang]}
+        </figcaption>
+      </figure>
+
       <div className="mx-auto max-w-[680px] text-center">
         <Reveal>
           <p className="font-mono text-[11px] uppercase tracking-label text-grafito/55">{copy.opening.label[lang]}</p>
@@ -31,21 +53,6 @@ export function Opening({ lang }: { lang: Lang }) {
       </div>
 
       {/* Horizontal evocadora — anticipación. Teaser, no álbum. */}
-      {/* Sin revelado: mismo motivo que en La Casa (pie con mix-blend). */}
-      <figure className="relative mt-16 aspect-[16/7] w-full overflow-hidden border border-linea">
-        <Image
-          src="/img/opening.jpg"
-          alt={copy.figs.opening.alt[lang]}
-          fill
-          placeholder="blur"
-          blurDataURL={blur.opening}
-          sizes="(min-width: 768px) 90vw, 100vw"
-          className="object-cover"
-        />
-        <figcaption className="absolute bottom-5 left-5 font-mono text-[10px] uppercase tracking-[0.22em] text-galeria/85 mix-blend-difference">
-          {copy.figs.opening.caption[lang]}
-        </figcaption>
-      </figure>
     </Section>
   );
 }

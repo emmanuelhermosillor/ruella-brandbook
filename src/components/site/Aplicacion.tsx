@@ -164,7 +164,13 @@ function SurveyForm({
                     className="object-cover"
                     style={{ objectPosition: "center 35%" }}
                   />
-                  <figcaption className="absolute bottom-5 left-5 font-mono text-[10px] uppercase tracking-[0.22em] text-galeria/85 mix-blend-difference">
+                  {/* Velo suave para que el pie se lea sobre cualquier foto. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-24"
+        style={{ background: "linear-gradient(0deg, rgba(42,42,40,0.38) 0%, rgba(42,42,40,0) 100%)" }}
+      />
+      <figcaption className="absolute bottom-5 left-5 font-mono text-[10px] uppercase tracking-[0.22em] text-galeria">
                     {copy.figs.gate.caption[lang]}
                   </figcaption>
                 </figure>
