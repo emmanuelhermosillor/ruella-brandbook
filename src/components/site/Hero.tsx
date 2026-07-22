@@ -2,22 +2,27 @@ import Image from "next/image";
 import { Button } from "@/components/Button";
 import { copy, type Lang } from "@/content/copy";
 import { blur } from "@/lib/blur";
+import { HeroVideo } from "./HeroVideo";
+
+const HERO_POSTER = "/img/hero-poster-v1.jpg";
 
 export function Hero({ lang }: { lang: Lang }) {
   return (
     <section id="top" className="relative flex min-h-screen items-center overflow-hidden">
+      {/* El poster es el LCP: hereda el rol de la foto. El video nunca lo bloquea. */}
       <Image
-        src="/img/hero.jpg"
+        src={HERO_POSTER}
         alt={copy.figs.hero.alt[lang]}
         fill
         priority
         fetchPriority="high"
         placeholder="blur"
-        blurDataURL={blur.hero}
+        blurDataURL={blur.heroPoster}
         sizes="100vw"
         className="object-cover"
-        style={{ objectPosition: "center 40%" }}
+        style={{ objectPosition: "center 45%" }}
       />
+      <HeroVideo poster={HERO_POSTER} />
       {/* Velo galería (nunca negro). Desktop: fuerte a la izquierda. */}
       <div
         className="absolute inset-0 hidden md:block"
