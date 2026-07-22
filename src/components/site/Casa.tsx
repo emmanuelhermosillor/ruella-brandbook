@@ -19,6 +19,9 @@ export function Casa({ lang }: { lang: Lang }) {
           <p className="mt-5 font-body text-[16px] font-light leading-relaxed text-grafito/75">
             {copy.casa.body2[lang]}
           </p>
+          <p className="mt-5 font-body text-[16px] font-light leading-relaxed text-grafito/75">
+            {copy.casa.body3[lang]}
+          </p>
         </div>
 
         <div className="relative aspect-[4/5] w-full overflow-hidden border border-linea">

@@ -31,6 +31,23 @@ export function Circulo({ lang }: { lang: Lang }) {
               className="mt-7 inline-flex items-center font-mono text-[11px] uppercase tracking-[0.18em] text-galeria/55 transition-colors hover:text-galeria"
             >
               {copy.circulo.more[lang]}
+              {/* El texto visible se repite por diseño; el destino se nombra
+                  para lectores de pantalla y buscadores, sin verse. */}
+              <span
+                style={{
+                  position: "absolute",
+                  width: 1,
+                  height: 1,
+                  padding: 0,
+                  margin: -1,
+                  overflow: "hidden",
+                  clip: "rect(0 0 0 0)",
+                  whiteSpace: "nowrap",
+                  border: 0,
+                }}
+              >
+                {" "}— {item.title[lang]}
+              </span>
             </a>
           </div>
         ))}

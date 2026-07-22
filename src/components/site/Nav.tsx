@@ -48,7 +48,7 @@ export function Nav({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void 
 
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em]">
-            {(["es", "en"] as const).map((l, i) => (
+            {(["en", "es"] as const).map((l, i) => (
               <span key={l} className="flex items-center gap-2">
                 {i === 1 && <span className="text-piedra">|</span>}
                 <button

@@ -26,16 +26,24 @@ const plexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
+const DESCRIPTION_EN =
+  "A curation house for exceptional real estate. A closed circle. Entry by invitation.";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://ruella.mx"),
   title: "Ruella · Quietly first.",
-  description: "Una casa de curaduría. Un círculo cerrado. Acceso por invitación.",
+  description: DESCRIPTION_EN,
+  alternates: {
+    canonical: "/",
+    languages: { en: "/", es: "/?lang=es", "x-default": "/" },
+  },
   openGraph: {
     title: "Ruella · Quietly first.",
-    description: "Una casa de curaduría. Un círculo cerrado. Acceso por invitación.",
+    description: DESCRIPTION_EN,
     url: "https://ruella.mx",
     siteName: "Ruella",
-    locale: "es_MX",
+    locale: "en_US",
+    alternateLocale: "es_MX",
     type: "website",
   },
 };
@@ -49,7 +57,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="es"
+      lang="en"
       className={`${cormorant.variable} ${manrope.variable} ${plexMono.variable} h-full`}
     >
       <body className="min-h-full flex flex-col bg-galeria text-grafito">

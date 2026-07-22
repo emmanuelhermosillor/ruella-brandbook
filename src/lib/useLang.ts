@@ -6,18 +6,22 @@ const KEY = "ruella-lang";
 const EVENT = "ruella-lang-change";
 
 function readLang(): Lang {
-  if (typeof window === "undefined") return "es";
-  return localStorage.getItem(KEY) === "en" ? "en" : "es";
+  if (typeof window === "undefined") return "en";
+  // ?lang=es hace enlazable la versión en español (hreflang, correos, firmas).
+  const fromUrl = new URLSearchParams(window.location.search).get("lang");
+  if (fromUrl === "es" || fromUrl === "en") return fromUrl;
+  return localStorage.getItem(KEY) === "es" ? "es" : "en";
 }
 
 /**
- * Persistent ES/EN choice, shared across every component that calls it.
- * Default "es"; restored from localStorage on mount. A custom event keeps
+ * Persistent EN/ES choice, shared across every component that calls it.
+ * Default "en" (the Los Cabos market is international); ES lives behind the
+ * switch and is linkable with ?lang=es. Restored from localStorage on mount. A custom event keeps
  * the nav toggle, the pages, and the global consent banner in sync live.
  */
 export function useLang(): [Lang, (l: Lang) => void] {
-  // Start "es" so SSR and first client render match; sync after mount.
-  const [lang, setLang] = useState<Lang>("es");
+  // Start "en" so SSR and first client render match; sync after mount.
+  const [lang, setLang] = useState<Lang>("en");
 
   useEffect(() => {
     const sync = () => {

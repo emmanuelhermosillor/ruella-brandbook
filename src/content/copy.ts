@@ -29,9 +29,27 @@ export const copy = {
       es: "Curamos las etapas tempranas de proyectos de lujo y abrimos el acceso a un círculo elegido con cuidado. Examinamos cada proyecto a fondo — si algo llega a ti por Ruella, es porque vale tu tiempo.",
       en: "We curate exceptional projects from their earliest stage and open them to a small, hand-picked circle. Everything is vetted, properly — if it reaches you through Ruella, it's worth your time.",
     },
+    // El rol de la casa, dicho por lo que sí hacemos (v2).
     body2: {
+      es: "Nuestro oficio es coordinar. En cada proyecto que tomamos establecemos la estrategia comercial — el estándar, las reglas, la forma de medir — y convocamos a los asesores e inversionistas que la hacen suceder. El desarrollador construye. El asesor vende. Ruella cuida que todo ocurra como debe.",
+      en: "Our work is coordination. On every project we take on, we set the commercial strategy — the standards, the rules, the way results are measured — and we bring in the brokers and investors who make it happen. Developers build. Brokers sell. Ruella makes sure the whole thing runs the way it should.",
+    },
+    body3: {
       es: "Nuestra promesa es certeza: criterio en lo que elegimos, verdad en lo que ponemos frente a ti, y un lugar entre quienes hacen las cosas a conciencia.",
       en: "Our promise is certainty: judgment in what we choose, truth in what we place in front of you, and a seat among people who do things properly.",
+    },
+  },
+
+  // El respaldo: Grubsa = origen · BAS Holding = grupo · Ruella = parte del grupo.
+  respaldo: {
+    label: { es: "El Respaldo", en: "The Backing" },
+    title: {
+      es: "Cuarenta años construyendo detrás de cada puerta que abrimos.",
+      en: "Forty years of building stand behind every door we open.",
+    },
+    body: {
+      es: "Ruella es parte de BAS Holding, el grupo que reúne a Grubsa, Adria Capital y Ruella. De Grubsa nace todo — más de cuarenta años desarrollando, y la razón de que exista lo demás. Lo que eso significa en la práctica es simple: los proyectos que abrimos tienen quien los construye, y un grupo que responde por ellos.",
+      en: "Ruella is part of BAS Holding, the group that brings together Grubsa, Adria Capital and Ruella. Grubsa is where it began — more than forty years developing real estate, and the reason the rest exists. What that means in practice is simple: the projects we open have someone who builds them, and a group that answers for them.",
     },
   },
 
@@ -43,28 +61,28 @@ export const copy = {
       {
         n: "01",
         href: "/inversionistas",
-        title: { es: "Inversionistas", en: "Investors" },
+        title: { es: "Para compradores e inversionistas", en: "For buyers & investors" },
         body: {
-          es: "Producto que no está afuera, curado y con dictamen. Para decidir con calma.",
-          en: "Curated, vetted opportunities you won't find listed. Decide at your own pace.",
+          es: "Producto curado que no está afuera, abierto temprano — y un grupo detrás que responde por la obra.",
+          en: "Vetted opportunities you won't find listed, opened early — with a group behind them that answers for the build.",
         },
       },
       {
         n: "02",
         href: "/brokers",
-        title: { es: "Brokers / Asesores", en: "Brokers" },
+        title: { es: "Para asesores y agencias", en: "For agents & brokerages" },
         body: {
-          es: "Inventario que no está afuera. Tu comisión completa, sin split.",
-          en: "Inventory no one else holds. Your commission stays whole.",
+          es: "Inventario que nadie más tiene, tu comisión completa y tu cliente registrado a tu nombre.",
+          en: "Inventory no one else holds, your commission whole, and your client registered under your name.",
         },
       },
       {
         n: "03",
         href: "/desarrolladores",
-        title: { es: "Desarrolladores", en: "Developers" },
+        title: { es: "Para desarrolladores", en: "For developers" },
         body: {
-          es: "Absorción temprana sin quemar tu precio público. Un sello que el mercado respeta.",
-          en: "Early absorption, your public pricing untouched. A seal the market respects.",
+          es: "Absorción temprana sin tocar tu precio público, y un sistema comercial con reglas y reportes de verdad.",
+          en: "Early absorption with your public pricing untouched, and a commercial system with rules and real reporting.",
         },
       },
     ],
@@ -75,8 +93,8 @@ export const copy = {
     label: { es: "La Apertura No. 001", en: "Opening No. 001" },
     place: { es: "The Cliff Club · Los Cabos", en: "The Cliff Club · Los Cabos" },
     body: {
-      es: "Un nuevo proyecto llega a Ruella. Tu invitación está por llegar, a tu nombre.",
-      en: "A new project is coming to Ruella. Your invitation will arrive with your name on it.",
+      es: "Un nuevo proyecto llega a Ruella. Su dictamen técnico está obtenido y las licencias avanzan al 60% — dicho sin énfasis, porque es simplemente donde está el proyecto. Tu invitación está por llegar, a tu nombre.",
+      en: "A new project is coming to Ruella. Its technical assessment is complete and permitting stands at sixty per cent — said plainly, because that is simply where the project is. Your invitation will arrive with your name on it.",
     },
     cta: { es: "Solicitar acceso", en: "Request access" },
   },
@@ -175,37 +193,41 @@ export const copy = {
 
   perfiles: {
     brokers: {
-      label: { es: "El Círculo · Brokers y Asesores", en: "The Circle · Brokers" },
+      label: { es: "El Círculo · Para asesores y agencias", en: "The Circle · For agents & brokerages" },
       title: { es: "Tu comisión, completa. Tu cliente, a tu nombre.", en: "Your commission stays whole. Your client stays yours." },
       paras: {
         es: [
           "Los mejores asesores pasan su carrera peleando por el mismo inventario que tienen todos. Ruella trabaja al revés.",
-          "No somos una agencia y no competimos contigo. Curamos proyectos que no están afuera y los abrimos a un círculo cerrado. Tú traes la relación; nosotros ponemos lo que nadie más tiene, y las reglas que te cuidan.",
-          "No somos un master broker. Tu comisión no se reparte: es tuya, completa. Y tu cliente queda registrado a tu nombre: la casa nunca pasa por encima de ti.",
+          "Nuestro oficio es coordinar, no vender. Curamos proyectos que no salen al mercado, ponemos las reglas con las que todos juegan y te entregamos lo que nadie más tiene. La relación es tuya: cada conversación con tu cliente pasa por ti.",
+          "Tu comisión no se reparte: es tuya, completa. Y tu cliente queda registrado a tu nombre.",
+          "Detrás de los proyectos está BAS Holding, el grupo que nació de Grubsa en cuarenta años de obra. Lo que le llevas a tu cliente tiene quién responda por él.",
           "Se entra por invitación. Si tu oficio es el lujo y lo tratas como oficio, hay una silla que podría ser tuya.",
         ],
         en: [
           "The best brokers spend their careers fighting over the same inventory as everyone else. Ruella works the other way around.",
-          "We're not an agency, and we don't compete with you. We curate projects that never get listed and open them to a closed circle. You bring the relationship; we bring what no one else holds — and rules that protect it.",
-          "We're not a master broker. Your commission is never split — it's yours, whole. Your client is registered under your name, and we never go around you.",
+          "Our role is to coordinate, not to sell. We curate projects that never get listed, set the rules everyone works by, and hand you what no one else holds. The relationship is yours — every conversation with your client goes through you.",
+          "Your commission is never split — it's yours, whole. Your client is registered under your name.",
+          "Behind the projects stands BAS Holding, the group that grew out of Grubsa over forty years of building. What you bring your client has someone standing behind it.",
           "Entry is by invitation. If the high end is your craft, there may be a seat here for you.",
         ],
       },
       cta: { es: "Solicitar acceso", en: "Request access" },
     },
     inversionistas: {
-      label: { es: "El Círculo · Inversionistas", en: "The Circle · Investors" },
+      label: { es: "El Círculo · Para compradores e inversionistas", en: "The Circle · For buyers & investors" },
       title: { es: "El acceso es el verdadero lujo.", en: "Access is the real luxury." },
       paras: {
         es: [
           "Todo proyecto extraordinario tiene un tramo que no se anuncia: se abre, en privado, a un círculo elegido con cuidado. Ruella cura ese tramo y lo pone en tu mesa.",
-          "Aquí no compras un folleto: compras un proyecto que pasó el examen de la casa. La mayoría no pasa; eso es exactamente lo que vale el que sí.",
+          "Aquí no compras un folleto: compras un proyecto que pasó El Dictamen de la casa. La mayoría no pasa; eso es exactamente lo que vale el que sí.",
+          "Cada proyecto que abrimos está respaldado por BAS Holding — Grubsa, Adria Capital y Ruella bajo un mismo grupo, y más de cuarenta años de obra detrás.",
           "Nunca un carrito, siempre una conversación. Un humano de la casa te acompaña de principio a fin, a tu ritmo, con condiciones por escrito y sujeto a disponibilidad.",
           "Si valoras el acceso que no se anuncia, hay una conversación que vale la pena tener.",
         ],
         en: [
           "Every exceptional project has a stage that's never advertised — opened privately, to a circle chosen with care. That is the stage Ruella curates.",
-          "You're not buying a brochure here. You're buying a project that passed a demanding review — most don't, and that's precisely the point.",
+          "You're not buying a brochure here. You're buying a project that passed The Assessment — most don't, and that's precisely the point.",
+          "Every project we open is backed by BAS Holding — Grubsa, Adria Capital and Ruella under one group, with more than forty years of building behind it.",
           "Never a cart, always a conversation. Someone from Ruella walks with you from start to finish, at your pace, with terms in writing — subject to availability.",
           "If quiet access is what you value, this conversation is worth having.",
         ],
@@ -213,19 +235,23 @@ export const copy = {
       cta: { es: "Solicitar acceso", en: "Request access" },
     },
     desarrolladores: {
-      label: { es: "El Círculo · Desarrolladores", en: "The Circle · Developers" },
+      label: { es: "El Círculo · Para desarrolladores", en: "The Circle · For developers" },
       title: { es: "Absorción temprana. Tu precio público, intacto.", en: "Early absorption. Your public pricing, untouched." },
       paras: {
         es: [
           "Las primeras etapas piden lo más difícil: vender con convicción antes de que el mercado la tenga. Ruella existe para ese tramo.",
+          "Coordinamos el frente comercial: la estrategia, las reglas con las que trabajan los asesores, y la forma en que se mide y se reporta. Tú sigues construyendo; nosotros hacemos que la máquina comercial corra.",
           "Colocamos tus primeras etapas dentro de un círculo curado — inversionistas y asesores bajo reglas claras — sin publicidad, sin ruido, y con tu lista pública protegida.",
-          "Lo que Ruella firma pasó un dictamen, y se reporta con disciplina. Ese sello cuida tu proyecto tanto como al comprador.",
+          "Lo que Ruella firma pasó El Dictamen, y se reporta con disciplina. Ese sello cuida tu proyecto tanto como al comprador.",
+          "Conocemos el oficio desde adentro: Ruella es parte de BAS Holding, el grupo con el que Grubsa desarrolla desde hace más de cuarenta años.",
           "Trabajamos con pocos proyectos a la vez, elegidos con criterio. Si el tuyo tiene el calibre, hablemos.",
         ],
         en: [
           "The earliest stage asks the hardest thing of a developer: selling with conviction before the market has any. That stage is our specialty.",
-          "We place it inside a curated circle — investors and brokers under clear rules — with no advertising, no noise, and your pricing protected.",
-          "Nothing carries the Ruella name without passing our review, and everything we do is reported with discipline. That protects your project as much as the buyer.",
+          "We coordinate the commercial side of it: the strategy, the rules brokers work by, and the way results are measured and reported. You keep building; we make the commercial engine run.",
+          "We place your early stages inside a curated circle — investors and brokers under clear rules — with no advertising, no noise, and your pricing protected.",
+          "Nothing carries the Ruella name without passing The Assessment, and everything we do is reported with discipline. That protects your project as much as the buyer.",
+          "We know the work from the inside: Ruella is part of BAS Holding, the group Grubsa has been developing with for more than forty years.",
           "We take on a few projects at a time, chosen carefully. If yours has the caliber, let's talk.",
         ],
       },
