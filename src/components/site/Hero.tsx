@@ -4,7 +4,7 @@ import { copy, type Lang } from "@/content/copy";
 import { blur } from "@/lib/blur";
 import { HeroVideo } from "./HeroVideo";
 
-const HERO_POSTER = "/img/hero-poster-v1.jpg";
+const HERO_POSTER = "/img/hero-poster-v2.jpg";
 
 export function Hero({ lang }: { lang: Lang }) {
   return (

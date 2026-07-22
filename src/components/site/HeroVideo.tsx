@@ -44,8 +44,8 @@ export function HeroVideo({ poster }: { poster: string }) {
       className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-out"
       style={{ objectPosition: "center 45%", opacity: ready ? 1 : 0 }}
     >
-      <source src="/video/hero-loop-v1.webm" type="video/webm" />
-      <source src="/video/hero-loop-v1.mp4" type="video/mp4" />
+      <source src="/video/hero-loop-v2.webm" type="video/webm" />
+      <source src="/video/hero-loop-v2.mp4" type="video/mp4" />
     </video>
   );
 }
